@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.TerraCuraPlantManager" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.TerraCuraPlantManager" parent="Theme.AppCompat.Light.DarkActionBar" />
 </resources>
+<!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--&lt;!&ndash; Configurações de estilo da sua aplicação &ndash;&gt;-->
+<!--</style>-->

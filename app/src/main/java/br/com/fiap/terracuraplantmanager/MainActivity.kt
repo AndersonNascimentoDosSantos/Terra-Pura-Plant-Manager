@@ -152,7 +152,7 @@ class MainActivity : ComponentActivity() {
 
         // Send the JSON object to the endpoint
         val request = Request.Builder()
-            .url("https://plant.id/api/v3/identification?common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=br,en")
+            .url("https://plant.id/api/v3/identification?common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=pt,en")
             .post(RequestBody.create(MediaType.parse("application/json"), jsonObject.toString()))
             .addHeader("Api-Key", "GJA2ik5Ir2PDmPm3SogNxMp3nt7wcNkQvfEcG3Su46gxeKB3YX")
             .build()
@@ -187,7 +187,9 @@ class MainActivity : ComponentActivity() {
         plantInfo.value = jsonObject
 
         // Atualize o estado para exibir as informações na tela
-       navController.navigate("plantInfo")
+        runOnUiThread {
+            navController.navigate("plantInfo")
+        }
     }
 
     override fun onDestroy() {
