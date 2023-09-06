@@ -38,17 +38,20 @@ import java.io.FileInputStream
 import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import android.location.Location
+import com.google.android.gms.location.*
 
 class MainActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     private val viewModel: PlantIdentificationViewModel by viewModels()
-    private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(false)
-    private var shouldShowPlantInfo: MutableState<Boolean> = mutableStateOf(false)
+//    private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(false)
+//    private var shouldShowPlantInfo: MutableState<Boolean> = mutableStateOf(false)
     private var plantInfo: MutableState<JSONObject> = mutableStateOf(JSONObject("{}"))
     private lateinit var photoUri: Uri
-    private var shouldShowPhoto: MutableState<Boolean> = mutableStateOf(false)
-    lateinit var navController: NavController
+    private val REQUEST_LOCATION_PERMISSION = 123
+//    private var shouldShowPhoto: MutableState<Boolean> = mutableStateOf(false)
+    private lateinit var navController: NavController
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
@@ -139,45 +142,72 @@ class MainActivity : ComponentActivity() {
         Log.i("kilo", "Image captured: $photoUri")
 
         // Encode the image to base64
-        val file = File(photoUri.path)
+        val file = photoUri.path?.let { File(it) }
         val imageBytes = FileInputStream(file).readBytes()
         val imageBase64 = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-
-        // Create the JSON object
         val jsonObject = JSONObject()
-        jsonObject.put("images", "[${imageBase64}]")
-        jsonObject.put("latitude", 49.207)
-        jsonObject.put("longitude", 16.608)
-        jsonObject.put("similar_images", true)
+        // Verificar se a permissão de localização foi concedida
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // Configurar o cliente de localização
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        // Send the JSON object to the endpoint
-        val request = Request.Builder()
-            .url("https://plant.id/api/v3/identification?common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=pt,en")
-            .post(RequestBody.create(MediaType.parse("application/json"), jsonObject.toString()))
-            .addHeader("Api-Key", "GJA2ik5Ir2PDmPm3SogNxMp3nt7wcNkQvfEcG3Su46gxeKB3YX")
-            .build()
+            // Solicitar a localização do usuário
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    // Verificar se a localização foi obtida com sucesso
+                    if (location != null) {
+                        val latitude = location.latitude
+                        val longitude = location.longitude
 
-        val client = OkHttpClient()
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("kilo", "Failed to send image: ${e.message}")
-            }
+                        // Agora você pode usar as coordenadas de latitude e longitude no seu JSON
 
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    val jsonResponse = response.body()?.string()
-                    if (jsonResponse != null) {
-                        //val jsonObject = JSONObject(jsonResponse)
-                        Log.e("response", jsonResponse)
-                        this@MainActivity.processApiResponse(jsonResponse,navController)
+                        jsonObject.put("images", "[${imageBase64}]")
+                        jsonObject.put("latitude", latitude)
+                        jsonObject.put("longitude", longitude)
+                        jsonObject.put("similar_images", true)
+                        // Send the JSON object to the endpoint
+                        val request = Request.Builder()
+                            .url("https://plant.id/api/v3/identification?common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=pt")
+                            .post(RequestBody.create(MediaType.parse("application/json"), jsonObject.toString()))
+                            .addHeader("Api-Key", "GJA2ik5Ir2PDmPm3SogNxMp3nt7wcNkQvfEcG3Su46gxeKB3YX")
+                            .build()
+
+                        val client = OkHttpClient()
+                        client.newCall(request).enqueue(object : Callback {
+                            override fun onFailure(call: Call, e: IOException) {
+                                Log.e("kilo", "Failed to send image: ${e.message}")
+                            }
+
+                            override fun onResponse(call: Call, response: Response) {
+                                if (response.isSuccessful) {
+                                    val jsonResponse = response.body()?.string()
+                                    if (jsonResponse != null) {
+                                        //val jsonObject = JSONObject(jsonResponse)
+                                        Log.e("response", jsonResponse)
+                                        this@MainActivity.processApiResponse(jsonResponse,navController)
+                                    } else {
+                                        Log.e("kilo", "Empty response body")
+                                    }
+                                } else {
+                                    Log.e("kilo", "Failed to send image: ${response.code()}")
+                                }
+                            }
+                        })
+                        // O restante do seu código para enviar a solicitação à API
                     } else {
-                        Log.e("kilo", "Empty response body")
+                        // Não foi possível obter a localização
                     }
-                } else {
-                    Log.e("kilo", "Failed to send image: ${response.code()}")
                 }
-            }
-        })
+                .addOnFailureListener { e ->
+                    // Tratar erros na obtenção da localização
+                    Log.e("kilo", "Failed to get location: ${e.message}")
+                }
+        } else {
+            // Se a permissão de localização não foi concedida, solicite-a ao usuário
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        }
+
+
     }
     private fun processApiResponse(jsonResponse: String,navController: NavController) {
         val jsonObject = JSONObject(jsonResponse)
