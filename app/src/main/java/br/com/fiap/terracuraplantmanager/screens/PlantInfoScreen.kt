@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,14 +17,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
+import coil.compose.rememberImagePainter
 import coil.load
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 @Composable
 fun PlantInfoScreen(viewModel: PlantIdentificationViewModel) {
-    val plantInfo = viewModel.plantInfo.value
+//    val plantInfo = viewModel.plantInfo.value
+    val context = LocalContext.current
+    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
 
 
 
@@ -60,7 +65,25 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel) {
             }
 
             if (suggestionImages.isNotEmpty()) {
-                ImageSlider(images = suggestionImages)
+//                ImageSlider(images = suggestionImages)
+                val chunkedImages = suggestionImages.chunked(2)
+                chunkedImages.forEach { rowImages ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        rowImages.forEach { imageUrl ->
+                            Image(
+                                painter = rememberImagePainter(imageUrl),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(150.dp) // Adjust the image size as needed
+                            )
+                        }
+                    }
+                }
+
+
             }
 
             Text(text = info.optString("common_names", "No common names available"))
