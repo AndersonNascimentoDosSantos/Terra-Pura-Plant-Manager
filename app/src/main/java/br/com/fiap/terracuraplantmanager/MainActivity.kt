@@ -40,6 +40,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import android.location.Location
 import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
