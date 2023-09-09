@@ -1,5 +1,6 @@
 package br.com.fiap.terracuraplantmanager.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
@@ -9,12 +10,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.fiap.terracuraplantmanager.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -28,7 +31,7 @@ fun SplashScreen(navController: NavController) {
         delay(2000)
 
         // Navegue para a próxima tela, por exemplo, a tela de login.
-        navController.navigate("camera")
+        navController.navigate("welcome")
     }
 
     // Layout da SplashScreen
@@ -45,14 +48,10 @@ fun SplashScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Você pode adicionar um logotipo ou animação aqui, se desejar.
-            // Por enquanto, vamos adicionar apenas um texto simples.
-            Text(
-                text = "TerraCura Plant Manager",
-                style = TextStyle(
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
+            Image(
+                painter = painterResource(id = R.drawable.logotype),
+                contentDescription ="Splash logo",
+                modifier = Modifier.size(250.dp)
             )
         }
     }
