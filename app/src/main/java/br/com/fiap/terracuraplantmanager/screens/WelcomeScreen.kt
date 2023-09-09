@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,7 +40,9 @@ fun Welcome(navController: NavController) {
             fontWeight = FontWeight.Bold,
             lineHeight = 1.5.em,
             textAlign = TextAlign.Center,
-            modifier = Modifier.width(198.dp),
+            modifier = Modifier
+                .width(198.dp)
+                .padding(top = 50.dp),
             color = MaterialTheme.colorScheme.secondary,
             style = MaterialTheme.typography.bodyMedium
         )
