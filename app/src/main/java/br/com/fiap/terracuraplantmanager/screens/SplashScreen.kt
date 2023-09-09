@@ -31,7 +31,7 @@ fun SplashScreen(navController: NavController) {
         delay(2000)
 
         // Navegue para a próxima tela, por exemplo, a tela de login.
-        navController.navigate("camera")
+        navController.navigate("welcome")
     }
 
     // Layout da SplashScreen
