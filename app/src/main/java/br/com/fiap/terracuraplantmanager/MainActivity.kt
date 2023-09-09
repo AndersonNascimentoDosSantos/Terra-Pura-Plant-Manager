@@ -29,6 +29,13 @@ import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+<<<<<<< HEAD
+=======
+import android.location.Location
+import br.com.fiap.terracuraplantmanager.screens.Welcome
+import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationServices
+>>>>>>> master
 
 class MainActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
@@ -61,6 +68,10 @@ class MainActivity : ComponentActivity() {
             NavHost(navController as NavHostController, startDestination = "splash") {
                 composable("splash") {
                     SplashScreen(navController)
+                }
+                composable("welcome"){
+                    Welcome(navController = navController)
+
                 }
                 composable("camera") {
                     CameraScreen(
