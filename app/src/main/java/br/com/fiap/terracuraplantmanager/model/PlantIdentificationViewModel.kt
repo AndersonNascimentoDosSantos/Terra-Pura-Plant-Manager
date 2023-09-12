@@ -32,6 +32,12 @@ class PlantIdentificationViewModel : ViewModel() {
         }
     }
 
+    fun goback(navController: NavController) {
+        viewModelScope.launch {
+            navController.popBackStack()
+        }
+    }
+
     fun navigateTo(to: String, navController: NavController) {
         viewModelScope.launch {
             navController.navigate(to)
