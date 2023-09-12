@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,7 +34,7 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp).verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -47,6 +49,7 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
                     val suggestion = suggestions.getJSONObject(i)
                     val similarImages = suggestion.optJSONArray("similar_images")
                     val name = suggestion.optString("name")
+                    val probability = suggestion.optString("probability")
                     if (similarImages != null && similarImages.length() > 0) {
                         val imageUrl = similarImages.getJSONObject(0).optString("url")
 //                        val name = similarImages.getJSONObject(0).optString("name")
@@ -54,7 +57,7 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
                         if (imageUrl.isNotEmpty()) {
                             Log.e("if imageurl", "item no imageUrl")
                             Log.e("index:", "valor do index:$i")
-                            suggestionImages.add(PlantInfo(imageUrl, name,i))
+                            suggestionImages.add(PlantInfo(imageUrl, name,i,probability))
                         }
                     }else{
                         Log.e("imageUrl:","nao tem imagem similar")
@@ -73,7 +76,7 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         rowImages.forEach { plantInfo ->
-                            ImageCard(photoUrl = plantInfo.imageUrl, name = plantInfo.name, id = plantInfo.index, navController = navController)
+                            ImageCard( plantInfo = plantInfo, navController = navController)
                         }
                     }
                 }
