@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +34,11 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 @Composable
-fun ImageDetailScreen(plantId: Int? ,viewModel: PlantIdentificationViewModel,navController : NavController) {
+fun ImageDetailScreen(
+    plantId: Int?,
+    viewModel: PlantIdentificationViewModel,
+    navController: NavController
+) {
     //    val plantInfo = viewModel.plantInfo.value
     val context = LocalContext.current
     val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
@@ -38,10 +46,11 @@ fun ImageDetailScreen(plantId: Int? ,viewModel: PlantIdentificationViewModel,nav
     val suggestionImages = mutableListOf<String>()
     plantInfo?.let { info ->
         val suggestions = info.getJSONObject("result").getJSONObject("classification")
-                .getJSONArray("suggestions")
+            .getJSONArray("suggestions")
 
 
-        val similarImages = plantId?.let { suggestions.getJSONObject(it).optJSONArray("similar_images") }
+        val similarImages =
+            plantId?.let { suggestions.getJSONObject(it).optJSONArray("similar_images") }
         if (similarImages != null && similarImages.length() > 0) {
             for (i in 0 until similarImages.length()) {
 
@@ -57,39 +66,60 @@ fun ImageDetailScreen(plantId: Int? ,viewModel: PlantIdentificationViewModel,nav
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(16.dp).verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            if (suggestionImages.isNotEmpty()) {
-                ImageSlider(images = suggestionImages)
+            Row(
+                modifier = Modifier
+//                .fillMaxSize()
+                    .padding(5.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                if (suggestionImages.isNotEmpty()) {
+                    ImageSlider(images = suggestionImages)
+                }
             }
 
+
+
+
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(5.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(
+                    onClick = {
+                        // Navegue de volta para a tela anterior
+                        viewModel.goback(navController = navController)
+                    },
+                    modifier = Modifier.width(150.dp)
+
+//                        .fillMaxWidth()
+//                        .padding(8.dp)
+                ) {
+                    Text(text = "Voltar")
+                }
+
+                // Botão de Adicionar Planta
+                Button(
+                    onClick = {
+                        // Implemente a lógica para adicionar uma planta aqui
+                        // Por exemplo, você pode abrir uma nova tela para adicionar a planta
+                    },
+                    modifier = Modifier
+//                        .fillMaxWidth()
+                        .width(200.dp)
+//                        .padding(8.dp)
+                ) {
+                    Text(text = "Adicionar Planta")
+                }
+            }
             // Botão de Voltar
-            Button(
-                onClick = {
-                    // Navegue de volta para a tela anterior
-                    viewModel.goback(navController = navController)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Text(text = "Voltar")
-            }
 
-            // Botão de Adicionar Planta
-            Button(
-                onClick = {
-                    // Implemente a lógica para adicionar uma planta aqui
-                    // Por exemplo, você pode abrir uma nova tela para adicionar a planta
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Text(text = "Adicionar Planta")
-            }
         }
     }
 }
