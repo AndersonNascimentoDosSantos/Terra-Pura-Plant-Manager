@@ -46,7 +46,7 @@ class DataMainipulation {
         jsonObject.put("longitude", longitude)
         jsonObject.put("similar_images", true)
         val request = Request.Builder()
-            .url("https://plant.id/api/v3/identification?common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=pt,en")
+            .url("https://plant.id/api/v3/identification?details=common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=pt,en")
             .post(RequestBody.create(MediaType.parse("application/json"), jsonObject.toString()))
             .addHeader("Api-Key", "GJA2ik5Ir2PDmPm3SogNxMp3nt7wcNkQvfEcG3Su46gxeKB3YX")
             .build()
