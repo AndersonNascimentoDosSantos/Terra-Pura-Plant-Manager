@@ -2,11 +2,11 @@ package br.com.fiap.terracuraplantmanager
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
-
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,9 +22,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import br.com.fiap.terracuraplantmanager.screens.CameraScreen
+import br.com.fiap.terracuraplantmanager.screens.ConfirmName
 import br.com.fiap.terracuraplantmanager.screens.ImagePreviewScreen
+import br.com.fiap.terracuraplantmanager.screens.MyPlants
 import br.com.fiap.terracuraplantmanager.screens.PlantInfoScreen
 import br.com.fiap.terracuraplantmanager.screens.SplashScreen
+import br.com.fiap.terracuraplantmanager.screens.Welcome
+import com.google.android.gms.location.LocationServices
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType
@@ -38,9 +42,6 @@ import java.io.FileInputStream
 import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import android.location.Location
-import com.google.android.gms.location.*
-import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
@@ -74,6 +75,16 @@ class MainActivity : ComponentActivity() {
             NavHost(navController as NavHostController, startDestination = "splash") {
                 composable("splash") {
                     SplashScreen(navController)
+                }
+                composable("welcome"){
+                    Welcome(navController = navController)
+
+                }
+                composable("confirmName") {
+                    ConfirmName(navController = navController)
+                }
+                composable("myPlants"){
+                    MyPlants(navController = navController)
                 }
                 composable("camera") {
                     CameraScreen(
