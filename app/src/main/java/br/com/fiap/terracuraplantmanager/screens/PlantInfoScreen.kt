@@ -55,8 +55,8 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
 //                        val name = similarImages.getJSONObject(0).optString("name")
 //                        val id = similarImages.getJSONObject(0).optString("id")
                         if (imageUrl.isNotEmpty()) {
-                            Log.e("if imageurl", "item no imageUrl")
-                            Log.e("index:", "valor do index:$i")
+//                            Log.e("if imageurl", "item no imageUrl")
+//                            Log.e("index:", "valor do index:$i")
                             suggestionImages.add(PlantInfo(imageUrl, name,i,probability))
                         }
                     }else{
@@ -73,7 +73,7 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
                 chunkedImages.forEach { rowImages ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         rowImages.forEach { plantInfo ->
                             ImageCard( plantInfo = plantInfo, navController = navController)

@@ -5,28 +5,33 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import br.com.fiap.terracuraplantmanager.components.DetailCard
 import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import coil.load
@@ -51,6 +56,39 @@ fun ImageDetailScreen(
 
         val similarImages =
             plantId?.let { suggestions.getJSONObject(it).optJSONArray("similar_images") }
+
+        val commonNames = plantId?.let {
+            suggestions
+                .getJSONObject(it)
+                .getJSONObject("details")
+                .getJSONObject("common_names")
+                .optJSONArray("pt")
+                .takeIf { it != null && it.length() > 0 }
+                ?: suggestions
+                    .getJSONObject(it)
+                    .getJSONObject("details")
+                    .getJSONObject("common_names")
+                    .getJSONArray("en")
+        }
+        val taxonomy = plantId?.let { suggestions.getJSONObject(it)
+            .getJSONObject("details")
+            .getJSONObject("taxonomy") }
+        val description = plantId?.let {
+            val descriptionObject = suggestions
+                .getJSONObject(it)
+                .getJSONObject("details")
+                .getJSONObject("description")
+
+            val ptDescription = descriptionObject.optJSONObject("pt")
+            val enDescription = descriptionObject.optJSONObject("en")
+
+//            ptDescription?.optString("value") ?: enDescription?.optString("value") ?: ""
+            descriptionObject.optJSONObject("pt") ?:descriptionObject.optJSONObject("en")
+
+        } ?: ""
+
+
+
         if (similarImages != null && similarImages.length() > 0) {
             for (i in 0 until similarImages.length()) {
 
@@ -65,26 +103,171 @@ fun ImageDetailScreen(
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp).verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+                .fillMaxHeight() // Preenche toda a altura disponível
+                .fillMaxWidth()
         ) {
-            Row(
+            Column(
                 modifier = Modifier
-//                .fillMaxSize()
-                    .padding(5.dp),
-                verticalAlignment = Alignment.CenterVertically,
+                    .weight(1f) // Divide igualmente o espaço vertical disponível
+                    .fillMaxWidth() // Preenche toda a largura disponível
             ) {
-                if (suggestionImages.isNotEmpty()) {
+                Row(
+                    modifier = Modifier
+                        .padding(5.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+
+                ) {
                     ImageSlider(images = suggestionImages)
                 }
             }
+            /*
+//            Column(
+//                modifier = Modifier
+//                    .weight(2f) // Divide igualmente o espaço vertical disponível
+//                    .fillMaxWidth() // Preenche toda a largura disponível
+//            ) {
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .padding(5.dp)
+//                        .horizontalScroll(rememberScrollState()), // Habilita a rolagem horizontal,
+//                    horizontalArrangement = Arrangement.SpaceBetween
+//
+//                ) {
+//                    Column(
+//                        modifier = Modifier
+//                            .fillMaxWidth(1.2f) // Preenche 1/3 da largura disponível
+//                            .background(Color.Red)
+//                            .padding(5.dp)
+//                    ) {
+//                        // Preencha esta coluna com o conteúdo desejado
+//                        Row(
+//                            modifier = Modifier.fillMaxWidth() .padding(5.dp),
+//                            horizontalArrangement = Arrangement.SpaceBetween
+//                        ) {
+//
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")       }
+//
+//                    }
+//
+//                    Spacer(modifier = Modifier.width(5.dp)) // Adiciona um espaço de 5dp entre as colunas
+//
+//                    Column(
+//                        modifier = Modifier
+//                            .fillMaxWidth(1.2f) // Preenche 1/3 da largura disponível
+//                            .background(Color.Blue)
+//                            .padding(5.dp)
+//                    ) {
+//                        // Preencha esta coluna com o conteúdo desejado
+//                        Row(
+//                            modifier = Modifier.fillMaxWidth() .padding(5.dp),
+//                            horizontalArrangement = Arrangement.SpaceBetween
+//                        ) { Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                        }
+//
+//                    }
+//
+//                    Spacer(modifier = Modifier.width(5.dp)) // Adiciona um espaço de 5dp entre as colunas
+//
+//                    Column(
+//                        modifier = Modifier
+//                            .fillMaxWidth(1.2f) // Preenche 1/3 da largura disponível
+//                            .background(Color.Black)
+//                            .padding(5.dp)
+//                    ) {
+//                        // Preencha esta coluna com o conteúdo desejado
+//                        Row(
+//                            modifier = Modifier.fillMaxWidth() .padding(5.dp),
+//                            horizontalArrangement = Arrangement.SpaceBetween
+//                        ) { Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                            Text(text = "Column 3")
+//                        }
+//
+//                    }
+//                }
+//            }
 
+             */
 
+            Column(
+                modifier = Modifier
+                    .weight(2f) // Divide igualmente o espaço vertical disponível
+                    .fillMaxWidth() // Preenche toda a largura disponível
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(5.dp)
+                        .horizontalScroll(rememberScrollState())
+                        , // Habilita a rolagem horizontal,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    DetailCard(commonNames)
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize() // Preenche toda a largura disponível
+                            .fillMaxWidth()
+                            .background(Color.Blue)
+                            .padding(5.dp)
+                    ) {
+                        // Preencha esta coluna com o conteúdo desejado
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) { Text(text = "Column 3")
+                            Text(text = "Column 3")
+                            Text(text = "Column 3")
+                            Text(text = "Column 3")
+                            Text(text = "Column 3")
+                                                    }
 
+                    }
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize() // Preenche toda a largura disponível
+                            .background(Color.Black)
+                            .fillMaxWidth()
+                            .padding(5.dp)
+                    ) {
+                        // Preencha esta coluna com o conteúdo desejado
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) { Text(text = "Column 3")
+                            Text(text = "Column 3")
+                            Text(text = "Column 3")
+                            Text(text = "Column 3")
+                            Text(text = "Column 3")
+                                                    }
 
-            Row(
+                    }
+                }
+            }
+
+            Column(
+                modifier = Modifier
+                    .weight(0.4f) // Divide igualmente o espaço vertical disponível
+                    .fillMaxWidth() // Preenche toda a largura disponível
+//                    .background(Color.Red)
+            ) {
+                Row(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(5.dp),
@@ -96,10 +279,9 @@ fun ImageDetailScreen(
                         // Navegue de volta para a tela anterior
                         viewModel.goback(navController = navController)
                     },
-                    modifier = Modifier.width(150.dp)
-
-//                        .fillMaxWidth()
-//                        .padding(8.dp)
+                    modifier = Modifier
+                        .width(150.dp)
+                        .height(65.dp)
                 ) {
                     Text(text = "Voltar")
                 }
@@ -111,14 +293,13 @@ fun ImageDetailScreen(
                         // Por exemplo, você pode abrir uma nova tela para adicionar a planta
                     },
                     modifier = Modifier
-//                        .fillMaxWidth()
                         .width(200.dp)
-//                        .padding(8.dp)
+                        .height(65.dp)
                 ) {
                     Text(text = "Adicionar Planta")
                 }
             }
-            // Botão de Voltar
+        }
 
         }
     }
