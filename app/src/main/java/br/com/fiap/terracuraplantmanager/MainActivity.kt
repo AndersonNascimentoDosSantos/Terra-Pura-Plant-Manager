@@ -3,7 +3,6 @@ package br.com.fiap.terracuraplantmanager
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -31,7 +30,6 @@ import br.com.fiap.terracuraplantmanager.screens.SplashScreen
 import br.com.fiap.terracuraplantmanager.screens.Welcome
 import com.google.android.gms.location.LocationServices
 import br.com.fiap.terracuraplantmanager.screens.Welcome
-import com.google.android.gms.location.LocationServices
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.ExecutorService
