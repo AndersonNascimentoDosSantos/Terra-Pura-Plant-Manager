@@ -25,10 +25,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import br.com.fiap.terracuraplantmanager.R
 
 @Composable
 fun Welcome(navController: NavController) {
+    val navOptions = NavOptions.Builder()
+        .setPopUpTo("camera", inclusive = true)
+        .build()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
     ) {
@@ -70,6 +74,7 @@ fun Welcome(navController: NavController) {
             modifier = Modifier.width(300.dp),
             color = MaterialTheme.colorScheme.secondary
         )
+
 
         Spacer(modifier = Modifier.height(40.dp))
 

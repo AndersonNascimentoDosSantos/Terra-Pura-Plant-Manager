@@ -1,0 +1,805 @@
+{
+  "access_token": "Tz2x3xXUM5tjykJ",
+  "model_version": "plant_id:3.1.3",
+  "custom_id": null,
+  "input": {
+    "latitude": -14.793225,
+    "longitude": -39.039908,
+    "similar_images": true,
+    "images": [
+      "https://plant.id/media/imgs/96f3b0bce87049599729c1f8e6bb624c.jpg"
+    ],
+    "datetime": "2023-09-12T00:23:58.263642+00:00"
+  },
+  "result": {
+    "is_plant": {
+      "probability": 0.9999999,
+      "binary": true,
+      "threshold": 0.5
+    },
+    "classification": {
+      "suggestions": [
+        {
+          "id": "88fb9a27238d621d",
+          "name": "Ceropegia",
+          "probability": 0.21681836077173414,
+          "similar_images": [
+            {
+              "id": "fd2fbc25e2357712432c6a1047e713c8b123d7a1",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fd2/fbc25e2357712432c6a1047e713c8b123d7a1.jpeg",
+              "similarity": 0.584,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fd2/fbc25e2357712432c6a1047e713c8b123d7a1.small.jpeg"
+            },
+            {
+              "id": "b5ff6c9d4bd14644d9f31bb45664d3ce24517160",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/b5f/f6c9d4bd14644d9f31bb45664d3ce24517160.jpeg",
+              "similarity": 0.52,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/b5f/f6c9d4bd14644d9f31bb45664d3ce24517160.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": null,
+              "en": [
+                "Lantern flowers"
+              ]
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Ceropegia",
+              "order": "Gentianales",
+              "family": "Apocynaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": "https://pt.wikipedia.org/wiki/Ceropegia",
+              "en": "https://en.wikipedia.org/wiki/Ceropegia",
+              "global": "https://www.gbif.org/species/7150518"
+            },
+            "gbif_id": 7150518,
+            "inaturalist_id": 84826,
+            "rank": "genus",
+            "description": {
+              "pt": {
+                "value": "Ceropegia L. é um género botânico pertencente à família  Apocynaceae.",
+                "citation": "https://pt.wikipedia.org/wiki/Ceropegia",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              },
+              "en": {
+                "value": "Ceropegia is a genus of plants within the family Apocynaceae, native to Africa, southern Asia, and Australia.  It was named by Carl Linnaeus, who first described this genus in his Genera plantarum, which appeared in 1737. Linnaeus referred to the description and picture of a plant in the Horti Malabarici as the plant for which the genus was created. In 1753 he named this species as Ceropegia candelabrum. Linnaeus did not explain the etymology but later explanations stated that the name Ceropegia was from the Greek word keropegion κηροπηγɩον. This means candelabrum in Latin, which has a broader range than the modern word - \"a candlestick, a branched candlestick, a chandelier, candelabrum, or also lamp-stand, light-stand, sometimes of exquisite workmanship\".An alternative explanation for the name was given later by William Jackson Hooker in 1830 in Curtis's Botanical Magazine in the description of Ceropegia elegans: \"From κηρός, wax, and πηγή, a fountain, in allusion to the delicate, waxy umbels of some species\". However, four years later Hooker gave the etymology in the description in the same periodical of Ceropegia lushii as \"remarkable for the peculiar shape of its flowers, frequently arranged in umbels, hence its name κηροπηγɩον, a candelabrum, or lamp-stand\".They have many common names including lantern flower, parasol flower, parachute flower, bushman's pipe, string of hearts, snake creeper, wine-glass vine, rosary vine, and necklace vine.\nCeropegia species are traded, kept, and propagated as ornamental plants. In Africa, the roots and leaves of some species are eaten raw and the tubers in India are eaten raw or stewed in curries.",
+                "citation": "https://en.wikipedia.org/wiki/Ceropegia",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Apegia",
+              "Aulostephanus",
+              "Blepharanthera",
+              "Brachystelma",
+              "Brachystelmaria",
+              "Cinclia",
+              "Craterostemma",
+              "Decaceras",
+              "Dichaelia",
+              "Eriopetalum",
+              "Kinepetalum",
+              "Lasiostelma",
+              "Macropetalum",
+              "Micraster",
+              "Microstemma",
+              "Niota",
+              "Siphonostelma",
+              "Systrepha",
+              "Tapeinostelma",
+              "Tenaris"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/ad6/ad634b793a9347eefcbcb82e9f586013fc8dd186.jpg",
+              "citation": "//commons.wikimedia.org/wiki/User:Wildfeuer",
+              "license_name": "CC BY 2.5",
+              "license_url": "https://creativecommons.org/licenses/by/2.5/"
+            },
+            "edible_parts": null,
+            "watering": null,
+            "propagation_methods": null,
+            "entity_id": "88fb9a27238d621d"
+          }
+        },
+        {
+          "id": "f631d8cbc3cfbdae",
+          "name": "Euphorbia trigona",
+          "probability": 0.1910531002230796,
+          "similar_images": [
+            {
+              "id": "a6e12e1356867b80efbbbeb76162a90d74d6eb49",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/a6e/12e1356867b80efbbbeb76162a90d74d6eb49.jpeg",
+              "similarity": 0.67,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/a6e/12e1356867b80efbbbeb76162a90d74d6eb49.small.jpeg"
+            },
+            {
+              "id": "14eeec11f6f1798e8b0b83b8c87d0e7e63037e49",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/14e/eec11f6f1798e8b0b83b8c87d0e7e63037e49.jpeg",
+              "similarity": 0.651,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/14e/eec11f6f1798e8b0b83b8c87d0e7e63037e49.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": [
+                "Candelabro"
+              ],
+              "en": [
+                "African milk tree",
+                "African Milk Weed",
+                "Cathedral Cactus",
+                "Abyssinian Euphorbia",
+                "High Chaparall"
+              ]
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Euphorbia",
+              "order": "Malpighiales",
+              "family": "Euphorbiaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": null,
+              "en": "https://en.wikipedia.org/wiki/Euphorbia_trigona",
+              "global": "https://www.gbif.org/species/3067098"
+            },
+            "gbif_id": 3067098,
+            "inaturalist_id": 322318,
+            "rank": "species",
+            "description": {
+              "pt": null,
+              "en": {
+                "value": "Euphorbia trigona, the African milk tree, cathedral cactus, or Abyssinian euphorbia, is a species of flowering plant that originates from Central Africa. Somewhat common in cultivation as a houseplant or as a hedge, the species is one of the euphorbias with succulent stems and branches as an adaptation to arid climates.",
+                "citation": "https://en.wikipedia.org/wiki/Euphorbia_trigona",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Euphorbia hermentiana"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/661/661c6d0ff522cc81292223ae2c0d921427aebd79.jpg",
+              "citation": "https://commons.wikimedia.org/wiki/File:Euphorbia_trigona_forma_rubra.jpg",
+              "license_name": "CC BY-SA 3.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+            },
+            "edible_parts": null,
+            "watering": {
+              "max": 2,
+              "min": 1
+            },
+            "propagation_methods": null,
+            "entity_id": "f631d8cbc3cfbdae"
+          }
+        },
+        {
+          "id": "894e17d8ab18574d",
+          "name": "Brasiliopuntia brasiliensis",
+          "probability": 0.15358841973536141,
+          "similar_images": [
+            {
+              "id": "a0db694d425f70740828f9c74ab320305334cc0e",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/a0d/b694d425f70740828f9c74ab320305334cc0e.jpeg",
+              "similarity": 0.499,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/a0d/b694d425f70740828f9c74ab320305334cc0e.small.jpeg"
+            },
+            {
+              "id": "e3599c43927a9c104f2a2e4916a9991c2b4700a2",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/e35/99c43927a9c104f2a2e4916a9991c2b4700a2.jpeg",
+              "license_name": "CC BY 4.0",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "citation": "Victor Farjalla Pontes",
+              "similarity": 0.366,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/e35/99c43927a9c104f2a2e4916a9991c2b4700a2.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": [
+                "Urumbeba",
+                "Iamacurú",
+                "Cacto-pé-de-mamão",
+                "Árvore-de-espinho",
+                "Saborosa",
+                "Deliciosa"
+              ],
+              "en": [
+                "Brazilian pricklypear"
+              ]
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Brasiliopuntia",
+              "order": "Caryophyllales",
+              "family": "Cactaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": null,
+              "en": "https://en.wikipedia.org/wiki/Brasiliopuntia",
+              "global": "https://www.gbif.org/species/7530646"
+            },
+            "gbif_id": 7530646,
+            "inaturalist_id": 184567,
+            "rank": "species",
+            "description": {
+              "pt": null,
+              "en": {
+                "value": "Brasiliopuntia is a genus in the cactus family, Cactaceae. It contains only one species, Brasiliopuntia brasiliensis.\nIt is found in Brazil, Paraguay, eastern Bolivia, Peru and northern Argentina, and has become naturalized in Florida among other places.",
+                "citation": "https://en.wikipedia.org/wiki/Brasiliopuntia",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Brasiliopuntia argentina",
+              "Brasiliopuntia bahiensis",
+              "Brasiliopuntia brasiliensis subsp. bahiensis",
+              "Brasiliopuntia brasiliensis subsp. subacarpa",
+              "Brasiliopuntia neoargentina",
+              "Brasiliopuntia schulzii",
+              "Brasiliopuntia subacarpa",
+              "Brasilopuntia brasiliensis",
+              "Cactus arboreus",
+              "Cactus brasiliensis",
+              "Cactus heterocladus",
+              "Cactus paradoxus",
+              "Cereus paradoxus",
+              "Opuntia arborea",
+              "Opuntia argentina",
+              "Opuntia bahiensis",
+              "Opuntia brasiliensis",
+              "Opuntia brasiliensis subsp. bahiensis",
+              "Opuntia brasiliensis subsp. subacarpa",
+              "Opuntia hieronymi",
+              "Opuntia neoargentina",
+              "Opuntia schulzii"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/5d6/5d672538bad26768b26a5074b5a210e7d19cfd3c.jpg",
+              "citation": "//commons.wikimedia.org/wiki/User:BotBln",
+              "license_name": "CC BY-SA 3.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+            },
+            "edible_parts": null,
+            "watering": null,
+            "propagation_methods": null,
+            "entity_id": "894e17d8ab18574d"
+          }
+        },
+        {
+          "id": "f3f5208228c1fec0",
+          "name": "Gymnocalycium",
+          "probability": 0.14478966353745581,
+          "similar_images": [
+            {
+              "id": "9dea8a523ad61578af5c5a414f4ce0ff5b36e14a",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/9de/a8a523ad61578af5c5a414f4ce0ff5b36e14a.jpeg",
+              "similarity": 0.572,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/9de/a8a523ad61578af5c5a414f4ce0ff5b36e14a.small.jpeg"
+            },
+            {
+              "id": "e9e5731e7c9412a64449d74bb2cf72df63ea4453",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/e9e/5731e7c9412a64449d74bb2cf72df63ea4453.jpeg",
+              "similarity": 0.538,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/e9e/5731e7c9412a64449d74bb2cf72df63ea4453.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": null,
+              "en": [
+                "chin cactus"
+              ]
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Gymnocalycium",
+              "order": "Caryophyllales",
+              "family": "Cactaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": "https://pt.wikipedia.org/wiki/Gymnocalycium",
+              "en": "https://en.wikipedia.org/wiki/Gymnocalycium",
+              "global": "https://www.gbif.org/species/7280543"
+            },
+            "gbif_id": 7280543,
+            "inaturalist_id": 348212,
+            "rank": "genus",
+            "description": {
+              "pt": {
+                "value": "Gymnocalycium é um gênero botânico da família cactaceae.",
+                "citation": "https://pt.wikipedia.org/wiki/Gymnocalycium",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              },
+              "en": {
+                "value": "Gymnocalycium, commonly called chin cactus, is a genus of about 70 South American species of cactus. The genus name Gymnocalycium (from Greek, \"naked calyx\") refers to the flower buds bearing no hair or spines.\nTheir main area of distribution is Argentina, part of Uruguay, Paraguay, southern Bolivia and part of Brazil. Most species are rather small varying from 4 to 15 centimetres in size. In cultivation they are popular for their easy flowering habits, and the flowers are generally brightly coloured. Where temperatures fall below 10 °C (50 °F) they must be cultivated under glass with heat.",
+                "citation": "https://en.wikipedia.org/wiki/Gymnocalycium",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Brachycalycium"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/06a/06ac602a6cac1c46ae490be6d6deb2ca41ef3058.jpg",
+              "citation": "https://commons.wikimedia.org/wiki/File:Gymnocalcium_baldianium.jpg",
+              "license_name": "CC BY-SA 3.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+            },
+            "edible_parts": null,
+            "watering": null,
+            "propagation_methods": null,
+            "entity_id": "f3f5208228c1fec0"
+          }
+        },
+        {
+          "id": "a759938efa2557cf",
+          "name": "Orbea variegata",
+          "probability": 0.12235284085285836,
+          "similar_images": [
+            {
+              "id": "a3e39d8ba25978b637e680bd1328567013c4a03b",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/a3e/39d8ba25978b637e680bd1328567013c4a03b.jpeg",
+              "similarity": 0.626,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/a3e/39d8ba25978b637e680bd1328567013c4a03b.small.jpeg"
+            },
+            {
+              "id": "cafb44ae8de320fd376af1f9e737476cfb9bcde3",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/caf/b44ae8de320fd376af1f9e737476cfb9bcde3.jpeg",
+              "license_name": "CC BY 4.0",
+              "license_url": "https://creativecommons.org/licenses/by/4.0/",
+              "citation": "Christiaan Viljoen",
+              "similarity": 0.367,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/caf/b44ae8de320fd376af1f9e737476cfb9bcde3.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": null,
+              "en": [
+                "starfishplant",
+                "Variegated Carrion-flower",
+                "Carrion-cactus",
+                "Cape Fritillary"
+              ]
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Orbea",
+              "order": "Gentianales",
+              "family": "Apocynaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": null,
+              "en": "https://en.wikipedia.org/wiki/Orbea_variegata",
+              "global": "https://www.gbif.org/species/9534856"
+            },
+            "gbif_id": 9534856,
+            "inaturalist_id": 431387,
+            "rank": "species",
+            "description": {
+              "pt": null,
+              "en": {
+                "value": "Orbea variegata is a species of flowering plant in the family Apocynaceae, known as the star flower. It is native to the coastal belt of the Western Cape, South Africa, growing actively during the winter rainfall season. It is an invasive species in southern Australia.",
+                "citation": "https://en.wikipedia.org/wiki/Orbea_variegata",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "? anguina",
+              "? bisulca",
+              "? bufonia",
+              "? clypeata",
+              "Ceropegia mixta",
+              "Ceropegia trisulca",
+              "Gonostapelia maculosa",
+              "Orbea anguinea",
+              "Orbea bisulca",
+              "Orbea bufonia",
+              "Orbea clypeata",
+              "Orbea conspurcata",
+              "Orbea curtisiae",
+              "Orbea curtisii",
+              "Orbea inodora",
+              "Orbea lepida",
+              "Orbea maculosa",
+              "Orbea marginata",
+              "Orbea marmorata",
+              "Orbea mixta",
+              "Orbea normalis",
+              "Orbea orbicularis",
+              "Orbea picta",
+              "Orbea planiflora",
+              "Orbea planiflora var. marginata",
+              "Orbea quinquenervia",
+              "Orbea quinquenervis",
+              "Orbea retusa",
+              "Orbea rugosa",
+              "Orbea trisulca",
+              "Orbea variegata",
+              "Orbea variegata subsp. clypeata",
+              "Orbea variegata var. clypeata",
+              "Orbea woodfordiana",
+              "Podanthes lepida",
+              "Stapelia anguinea",
+              "Stapelia atrata",
+              "Stapelia atrata var. proboscidea",
+              "Stapelia atrata var. rufescens",
+              "Stapelia atrata var. tigrina",
+              "Stapelia atropurpurea",
+              "Stapelia atropurpurea var. pan",
+              "Stapelia atropurpurea var. rosea",
+              "Stapelia beffoniana",
+              "Stapelia bidentata",
+              "Stapelia bifolia",
+              "Stapelia bisulca",
+              "Stapelia bufonia",
+              "Stapelia bufonis",
+              "Stapelia ciliolata",
+              "Stapelia ciliolulata",
+              "Stapelia clypeata",
+              "Stapelia conspurcata",
+              "Stapelia curtisiae",
+              "Stapelia curtisii",
+              "Stapelia deflexa",
+              "Stapelia hispida",
+              "Stapelia horizontalis",
+              "Stapelia inodora",
+              "Stapelia lepida",
+              "Stapelia limosa",
+              "Stapelia maculosa",
+              "Stapelia marginata",
+              "Stapelia marmorata",
+              "Stapelia mixta",
+              "Stapelia monstrosa",
+              "Stapelia natalensis",
+              "Stapelia normalis",
+              "Stapelia obliqua",
+              "Stapelia ophiuncula",
+              "Stapelia orbicularis",
+              "Stapelia orbiculata",
+              "Stapelia picta",
+              "Stapelia planiflora",
+              "Stapelia planiflora var. marginata",
+              "Stapelia putida",
+              "Stapelia quinquenervis",
+              "Stapelia retusa",
+              "Stapelia rosea",
+              "Stapelia rufescens",
+              "Stapelia rugosa",
+              "Stapelia rugosa var. coronata",
+              "Stapelia scutellata",
+              "Stapelia scylla",
+              "Stapelia tigrina",
+              "Stapelia trisulca",
+              "Stapelia variegata",
+              "Stapelia variegata f. putida",
+              "Stapelia variegata var. asparagensis",
+              "Stapelia variegata var. atrata",
+              "Stapelia variegata var. atropurpurea",
+              "Stapelia variegata var. brevicornis",
+              "Stapelia variegata var. bufonia",
+              "Stapelia variegata var. clypeata",
+              "Stapelia variegata var. conspurcata",
+              "Stapelia variegata var. curtisiae",
+              "Stapelia variegata var. curtisii",
+              "Stapelia variegata var. horizontalis",
+              "Stapelia variegata var. laeta",
+              "Stapelia variegata var. marginata",
+              "Stapelia variegata var. marmorata",
+              "Stapelia variegata var. mixta",
+              "Stapelia variegata var. normalis",
+              "Stapelia variegata var. pallida",
+              "Stapelia variegata var. picta",
+              "Stapelia variegata var. planiflora",
+              "Stapelia variegata var. prometheus",
+              "Stapelia variegata var. retusa",
+              "Stapelia variegata var. rugosa",
+              "Stapelia variegata var. trisulca",
+              "Stapelia woodfordiana",
+              "Stissera anguina",
+              "Stissera atropurpurea",
+              "Stissera bisulca",
+              "Stissera bufonia",
+              "Stissera clypeata",
+              "Stissera conspurcata",
+              "Stissera curtisiae",
+              "Stissera inodora",
+              "Stissera lepida",
+              "Stissera maculosa",
+              "Stissera marginata",
+              "Stissera marmorata",
+              "Stissera mixta",
+              "Stissera normalis",
+              "Stissera obliqua",
+              "Stissera orbicularis",
+              "Stissera picta",
+              "Stissera planiflora",
+              "Stissera quinquenervis",
+              "Stissera retusa",
+              "Stissera rugosa",
+              "Stissera variegata",
+              "Stissera woodfordiana",
+              "Stisseria anguina",
+              "Stisseria anguinea",
+              "Stisseria atropurpurea",
+              "Stisseria bisulca",
+              "Stisseria bufonia",
+              "Stisseria clypeata",
+              "Stisseria conspurcata",
+              "Stisseria curtisii",
+              "Stisseria inodora",
+              "Stisseria irrorata",
+              "Stisseria lepida",
+              "Stisseria maculosa",
+              "Stisseria marginata",
+              "Stisseria marmorata",
+              "Stisseria mixta",
+              "Stisseria normalis",
+              "Stisseria obliqua",
+              "Stisseria orbicularis",
+              "Stisseria picta",
+              "Stisseria planiflora",
+              "Stisseria quinquenervis",
+              "Stisseria retusa",
+              "Stisseria variegata",
+              "Stisseria woodfordiana",
+              "Tridentea rugosa",
+              "Tromostapelia maculosa",
+              "Tromotriche obliqua"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/c98/c9856f8af7d814aeb07376f198447a36d16b34fa.jpg",
+              "citation": "http://allthingsplants.com/users/profile/dave/",
+              "license_name": "CC BY-SA 3.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+            },
+            "edible_parts": null,
+            "watering": null,
+            "propagation_methods": null,
+            "entity_id": "a759938efa2557cf"
+          }
+        },
+        {
+          "id": "988a4898a98baed3",
+          "name": "Epiphyllum",
+          "probability": 0.06115118010462669,
+          "similar_images": [
+            {
+              "id": "c106f40440bb07f4337773b513b13746bf1d8780",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/c10/6f40440bb07f4337773b513b13746bf1d8780.jpeg",
+              "similarity": 0.683,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/c10/6f40440bb07f4337773b513b13746bf1d8780.small.jpeg"
+            },
+            {
+              "id": "afee019ed4e3d7e5d143b542f0ff641a80c5376a",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/afe/e019ed4e3d7e5d143b542f0ff641a80c5376a.jpeg",
+              "similarity": 0.61,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/afe/e019ed4e3d7e5d143b542f0ff641a80c5376a.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": null,
+              "en": [
+                "climbing cactus",
+                "Orchid cactus"
+              ]
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Epiphyllum",
+              "order": "Caryophyllales",
+              "family": "Cactaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": "https://pt.wikipedia.org/wiki/Epiphyllum",
+              "en": "https://en.wikipedia.org/wiki/Epiphyllum",
+              "global": "https://www.gbif.org/species/3084180"
+            },
+            "gbif_id": 3084180,
+            "inaturalist_id": 85411,
+            "rank": "genus",
+            "description": {
+              "pt": {
+                "value": "Epiphyllum é um gênero botânico da família cactaceae, de aspecto epífito, conhecido por seu potencial ornamental e flores com grande variedade de tons e cores. São popularmente conhecidos como \"cactos-orquídea\" e ocasionalmente referidos pela denominação mais genérica \"dama-da-noite\" (aplicada a outras cactáceas, bem como a plantas de diferentes famílias e gêneros).",
+                "citation": "https://pt.wikipedia.org/wiki/Epiphyllum",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              },
+              "en": {
+                "value": "Epiphyllum (; \"upon the leaf\" in Greek) is a genus of epiphytic plants in the cactus family (Cactaceae), native to Central America and South America. Common names for these species include climbing cacti, orchid cacti and leaf cacti, though the latter also refers to the genus Pereskia.",
+                "citation": "https://en.wikipedia.org/wiki/Epiphyllum",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Marniera",
+              "Phyllocactus",
+              "Phyllocereus"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/d1b/d1bbe297d0d662b83cfe56bdd032dcf5dd4cc67b.jpg",
+              "citation": "https://commons.wikimedia.org/wiki/File:Epiphyllum_crenatum_kimnachii1MW.jpg",
+              "license_name": "CC BY-SA 2.5",
+              "license_url": "https://creativecommons.org/licenses/by-sa/2.5/"
+            },
+            "edible_parts": null,
+            "watering": {
+              "max": 2,
+              "min": 2
+            },
+            "propagation_methods": null,
+            "entity_id": "988a4898a98baed3"
+          }
+        },
+        {
+          "id": "d007e4fd97a3c596",
+          "name": "Neoregelia",
+          "probability": 0.05699092938892587,
+          "similar_images": [
+            {
+              "id": "b3df93ecb1be7c9708d281e3357080e58fcacc2a",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/b3d/f93ecb1be7c9708d281e3357080e58fcacc2a.jpeg",
+              "similarity": 0.445,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/b3d/f93ecb1be7c9708d281e3357080e58fcacc2a.small.jpeg"
+            },
+            {
+              "id": "f00dc16414acbca9103a1e209acc74698d927d37",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/f00/dc16414acbca9103a1e209acc74698d927d37.jpeg",
+              "similarity": 0.432,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/f00/dc16414acbca9103a1e209acc74698d927d37.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": null,
+              "en": null
+            },
+            "taxonomy": {
+              "class": "Liliopsida",
+              "genus": "Neoregelia",
+              "order": "Poales",
+              "family": "Bromeliaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": "https://pt.wikipedia.org/wiki/Neoregelia",
+              "en": "https://en.wikipedia.org/wiki/Neoregelia",
+              "global": "https://www.gbif.org/species/2693967"
+            },
+            "gbif_id": 2693967,
+            "inaturalist_id": 141291,
+            "rank": "genus",
+            "description": {
+              "pt": {
+                "value": "Neoregelia L.B.Sm. é um género botânico pertencente à família  Bromeliaceae, subfamília Bromelioideae.\nO gênero foi nomeado em homenagem ao jardineiro e botânico alemão Eduard August von Regel (1815-1892).\nSão bromélias com folhas largas. As inflorescências se formam numa depressão no centro da planta, formando um receptáculo para recolher água. As folhas que rodeiam as inflorescências são brilhantes e coloridas.\nDevido a beleza de suas folhagens e inflorescências, algumas espécies de Neoregelia e seus híbridos são cultivadas como  plantas ornamentais.\nA maioria das espécies são epífitas. São encontradas no Brasil, Colômbia, Equador e Peru.",
+                "citation": "https://pt.wikipedia.org/wiki/Neoregelia",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              },
+              "en": {
+                "value": "Neoregelia is a genus of epiphytic flowering plants in the family Bromeliaceae, subfamily Bromelioideae, native to South American rainforests. The genus name is for Eduard August von Regel, Director of St. Petersburg Botanic Gardens in Russia (1875–1892).",
+                "citation": "https://en.wikipedia.org/wiki/Neoregelia",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Aregelia",
+              "Regelia"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/8df/8df74e728ba5d8b9b9667d012ef714df7a377e90.jpg",
+              "citation": "//commons.wikimedia.org/wiki/User:Keith_Edkins",
+              "license_name": "CC BY-SA 3.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+            },
+            "edible_parts": null,
+            "watering": {
+              "max": 2,
+              "min": 2
+            },
+            "propagation_methods": null,
+            "entity_id": "d007e4fd97a3c596"
+          }
+        },
+        {
+          "id": "ac9c45065f6f7387",
+          "name": "Austrocylindropuntia",
+          "probability": 0.053255505385958087,
+          "similar_images": [
+            {
+              "id": "fcad86b5ed9b9090c6437f345363c4d025e8ee55",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fca/d86b5ed9b9090c6437f345363c4d025e8ee55.jpeg",
+              "similarity": 0.649,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fca/d86b5ed9b9090c6437f345363c4d025e8ee55.small.jpeg"
+            },
+            {
+              "id": "30b5afcd4504be2d893b80455e8b8252584b2636",
+              "url": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/30b/5afcd4504be2d893b80455e8b8252584b2636.jpeg",
+              "similarity": 0.593,
+              "url_small": "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/30b/5afcd4504be2d893b80455e8b8252584b2636.small.jpeg"
+            }
+          ],
+          "details": {
+            "common_names": {
+              "pt": null,
+              "en": null
+            },
+            "taxonomy": {
+              "class": "Magnoliopsida",
+              "genus": "Austrocylindropuntia",
+              "order": "Caryophyllales",
+              "family": "Cactaceae",
+              "phylum": "Tracheophyta",
+              "kingdom": "Plantae"
+            },
+            "url": {
+              "pt": null,
+              "en": "https://en.wikipedia.org/wiki/Austrocylindropuntia",
+              "global": "https://www.gbif.org/species/7282090"
+            },
+            "gbif_id": 7282090,
+            "inaturalist_id": 320087,
+            "rank": "genus",
+            "description": {
+              "pt": null,
+              "en": {
+                "value": "Austrocylindropuntia is a genus of cacti (family Cactaceae) with 11 recognized species, which were once included in the genus Opuntia. Some are native to South America.",
+                "citation": "https://en.wikipedia.org/wiki/Austrocylindropuntia",
+                "license_name": "CC BY-SA 3.0",
+                "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+              }
+            },
+            "synonyms": [
+              "Andinopuntia",
+              "Banfiopuntia",
+              "Peruviopuntia",
+              "Pseudotephrocactus",
+              "Trichopuntia"
+            ],
+            "image": {
+              "value": "https://plant-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/66f/66fe7107886827de9fc6415bb2f09f3c66924e7f.jpg",
+              "citation": "//commons.wikimedia.org/wiki/User:Kenraiz",
+              "license_name": "CC BY-SA 3.0",
+              "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+            },
+            "edible_parts": null,
+            "watering": null,
+            "propagation_methods": null,
+            "entity_id": "ac9c45065f6f7387"
+          }
+        }
+      ]
+    }
+  },
+  "status": "COMPLETED",
+  "sla_compliant_client": true,
+  "sla_compliant_system": true,
+  "created": 1694478238.263642,
+  "completed": 1694478239.640726
+}
