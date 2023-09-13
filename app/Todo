@@ -1,0 +1,13 @@
+[x] construir tela ConfirmName
+[x] construir tela MyPlants
+[] agendar notificações
+[] Plant
+[] remove plant
+
+[] merge, pull request
+[] estilizar as telas
+[] estilizar as telas do anderson
+
+ORDEM DAS TELAS
+splash -> welcome -> confirmName -> myplants -> camera
+
