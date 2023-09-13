@@ -17,11 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
@@ -31,9 +30,9 @@ import br.com.fiap.terracuraplantmanager.R
 @Composable
 fun Welcome(navController: NavController) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
     ) {
+
         Text(
             text = "Gerencie suas plantas de forma facil",
             fontSize = 30.sp,
@@ -46,7 +45,9 @@ fun Welcome(navController: NavController) {
             color = MaterialTheme.colorScheme.secondary,
             style = MaterialTheme.typography.bodyMedium
         )
+
         Spacer(modifier = Modifier.height(60.dp))
+
         Row {
             Image(
                 painter = painterResource(id = R.drawable.ilustra),
@@ -55,10 +56,13 @@ fun Welcome(navController: NavController) {
             )
             Spacer(modifier = Modifier.width(100.dp))
         }
+
         Column {
 
         }
+
         Spacer(modifier = Modifier.height(50.dp))
+
         Text(
             text = "Não esqueça mais de regar suas plantas, Nós cuidamos de lembrar você sempre que precisar",
             textAlign = TextAlign.Center,
@@ -66,14 +70,35 @@ fun Welcome(navController: NavController) {
             modifier = Modifier.width(300.dp),
             color = MaterialTheme.colorScheme.secondary
         )
+
         Spacer(modifier = Modifier.height(40.dp))
-        Button(
-            onClick = { navController.navigate("camera") },
-            shape = RoundedCornerShape(13.dp),
-            colors = ButtonDefaults.buttonColors(Color(0xFF5AC074))
-        ) {
-            Text(text = ">")
+
+        Row {
+            Button(
+                onClick = { navController.navigate("confirmName") },
+                shape = RoundedCornerShape(13.dp),
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.arrow),
+                    contentDescription = "arrow",
+                    modifier = Modifier.size(30.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(25.dp))
+            Button(
+                onClick = { navController.navigate("camera") },
+                shape = RoundedCornerShape(13.dp),
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.icons8_camera_94),
+                    contentDescription = "arrow",
+                    modifier = Modifier.size(30.dp)
+                )
+            }
         }
+
     }
 
 }
