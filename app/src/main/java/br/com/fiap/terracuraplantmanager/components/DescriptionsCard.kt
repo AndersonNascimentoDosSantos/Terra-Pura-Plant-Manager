@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.json.JSONObject
 
@@ -41,8 +42,9 @@ fun DescriptionsCard(
             modifier = Modifier
                 .fillMaxSize()
                 .width((LocalConfiguration.current.screenWidthDp * 0.95).dp)
-                .padding(5.dp)
+                .padding(5.dp),
 //                    .blur()
+            verticalArrangement = Arrangement.Center
         ) {
 
             // Pelo menos um dos itens não é nulo ou vazio, então exibimos o card
@@ -53,12 +55,14 @@ fun DescriptionsCard(
                 // Renderize descrição
                 Text(
                     text = "Descrição:", modifier = Modifier,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.width(5.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .fillMaxSize()
                         .padding(10.dp)
                         .verticalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.Start

@@ -1,5 +1,6 @@
 package br.com.fiap.terracuraplantmanager.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import org.json.JSONObject
 
@@ -48,51 +53,102 @@ fun TaxonomyCard(
                 // Renderize taxonomia
                 Text(
                     text = "Taxonomia:", modifier = Modifier,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.width(5.dp))
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp),
-//                horizontalArrangement = Arrangement.Start
+                    verticalArrangement = Arrangement.Center
                 ) {
 
                     if (taxonomy != null) {
+                        val classString = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.Bold)
+                            ) {
+                                append("classe:")
+                            }
+                            append(" ${taxonomy.optString("class")}")
+                        }
+                        val genusString = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.Bold)
+                            ) {
+                                append("genus:")
+                            }
+                            append(" ${taxonomy.optString("genus")}")
+                        }
+                        val orderString = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.Bold)
+                            ) {
+                                append("order:")
+                            }
+                            append(" ${taxonomy.optString("order")}")
+                        }
+                        val familyString = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.Bold)
+                            ) {
+                                append("familia:")
+                            }
+                            append(" ${taxonomy.optString("family")}")
+                        }
+                        val phylumString = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.Bold)
+                            ) {
+                                append("phylum:")
+                            }
+                            append(" ${taxonomy.optString("phylum")}")
+                        }
+                        val kingdomString = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.Bold)
+                            ) {
+                                append("Reino:")
+                            }
+                            append(" ${taxonomy.optString("kingdom")}")
+                        }
+
                         Text(
-                            text = "classe: ${taxonomy.optString("class")}",
+                            text = classString,
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
 
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = "genus: ${taxonomy.optString("genus")}", modifier = Modifier,
+                            text = genusString, modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = "order: ${taxonomy.optString("order")}", modifier = Modifier,
+                            text = orderString, modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = "familia: ${taxonomy.optString("family")}",
+                            text = familyString,
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = "phylum: ${taxonomy.optString("phylum")}",
+                            text = phylumString,
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = "Reino: ${taxonomy.optString("kingdom")}",
+                            text = kingdomString,
                             modifier = Modifier,
-                            style = MaterialTheme.typography.headlineMedium
-                        )
+                            style = MaterialTheme.typography.headlineMedium,
+
+                            )
                         Spacer(modifier = Modifier.width(5.dp))
                     }
 

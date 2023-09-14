@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.json.JSONArray
 
@@ -37,7 +38,7 @@ fun CommonNameCard(
             modifier = Modifier
                 .fillMaxSize()
                 .width((LocalConfiguration.current.screenWidthDp * 0.95).dp)
-                .padding(5.dp)
+                .padding(5.dp), verticalArrangement = Arrangement.Center
 //                    .blur()
         ) {
 
@@ -47,7 +48,8 @@ fun CommonNameCard(
                 val names = mutableListOf<String>()
                 Text(
                     text = "Nomes comuns: ", modifier = Modifier,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold
                 )
 
                 if (commonName != null) {
@@ -64,7 +66,7 @@ fun CommonNameCard(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-//                        .fillMaxSize()
+                        .fillMaxSize()
                             .padding(10.dp),
                         horizontalArrangement = Arrangement.Start
                     ) {
@@ -80,7 +82,7 @@ fun CommonNameCard(
             } else {
                 // Renderize a mensagem "Não Possui Nomes Comuns"
                 Text(
-                    text = "Não Possui Nomes Comuns",
+                    text = "Não Possui Nomes Comuns registrados",
                     modifier = Modifier.padding(16.dp),
                     style = MaterialTheme.typography.headlineMedium
                 )
