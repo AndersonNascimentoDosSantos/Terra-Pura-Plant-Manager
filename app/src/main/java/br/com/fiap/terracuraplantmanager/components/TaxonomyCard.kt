@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -65,86 +66,42 @@ fun TaxonomyCard(
                 ) {
 
                     if (taxonomy != null) {
-                        val classString = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(fontWeight = FontWeight.Bold)
-                            ) {
-                                append("classe:")
-                            }
-                            append(" ${taxonomy.optString("class")}")
-                        }
-                        val genusString = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(fontWeight = FontWeight.Bold)
-                            ) {
-                                append("genus:")
-                            }
-                            append(" ${taxonomy.optString("genus")}")
-                        }
-                        val orderString = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(fontWeight = FontWeight.Bold)
-                            ) {
-                                append("order:")
-                            }
-                            append(" ${taxonomy.optString("order")}")
-                        }
-                        val familyString = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(fontWeight = FontWeight.Bold)
-                            ) {
-                                append("familia:")
-                            }
-                            append(" ${taxonomy.optString("family")}")
-                        }
-                        val phylumString = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(fontWeight = FontWeight.Bold)
-                            ) {
-                                append("phylum:")
-                            }
-                            append(" ${taxonomy.optString("phylum")}")
-                        }
-                        val kingdomString = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(fontWeight = FontWeight.Bold)
-                            ) {
-                                append("Reino:")
-                            }
-                            append(" ${taxonomy.optString("kingdom")}")
-                        }
-
                         Text(
-                            text = classString,
+                            text = getText("classe:", " ${taxonomy.optString("class")}"),
+
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
 
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = genusString, modifier = Modifier,
-                            style = MaterialTheme.typography.headlineMedium
-                        )
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(
-                            text = orderString, modifier = Modifier,
-                            style = MaterialTheme.typography.headlineMedium
-                        )
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(
-                            text = familyString,
+                            text = getText("genus:", " ${taxonomy.optString("genus")}"),
+
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = phylumString,
+                            text = getText("order:", " ${taxonomy.optString("order")}"),
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = kingdomString,
+                            text = getText("familia:", " ${taxonomy.optString("family")}"),
+
+                            modifier = Modifier,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = getText("phylum:", " ${taxonomy.optString("phylum")}"),
+                            modifier = Modifier,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = getText("Reino:", " ${taxonomy.optString("kingdom")}"),
                             modifier = Modifier,
                             style = MaterialTheme.typography.headlineMedium,
 
@@ -165,3 +122,13 @@ fun TaxonomyCard(
     }
 }
 
+fun getText(initialTExt: String, endText: String): AnnotatedString {
+    return buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(fontWeight = FontWeight.Bold)
+        ) {
+            append(initialTExt)
+        }
+        append(endText)
+    }
+}
