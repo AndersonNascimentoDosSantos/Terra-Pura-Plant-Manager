@@ -6,6 +6,7 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,6 +31,7 @@ import br.com.fiap.terracuraplantmanager.screens.PlantInfoScreen
 import br.com.fiap.terracuraplantmanager.screens.SplashScreen
 import br.com.fiap.terracuraplantmanager.screens.Welcome
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
     private var plantInfo: MutableState<JSONObject> = mutableStateOf(JSONObject("{}"))
     private lateinit var photoUri: Uri
     private val REQUEST_LOCATION_PERMISSION = 123
-
+    private val STORAGE_PERMISSION_REQUEST_CODE = 123
     private lateinit var navController: NavController
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -51,15 +53,17 @@ class MainActivity : ComponentActivity() {
             Log.i("kilo", "Permission granted")
             navController.navigate("camera")
         } else {
-            Log.i("kilo", "Permission denied")
+            showMessage("Permissão negada. Você pode conceder a permissão nas configurações do aplicativo.")
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             navController = rememberNavController()
             requestCameraPermission()
+            requestStoragePermission()
             outputDirectory = getOutputDirectory()
             cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -141,6 +145,20 @@ class MainActivity : ComponentActivity() {
 
         return if (mediaDir != null && mediaDir.exists()) mediaDir else filesDir
     }
+
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            STORAGE_PERMISSION_REQUEST_CODE
+        )
+    }
+
+    private fun showMessage(message: String) {
+        Snackbar.make(findViewById<View>(android.R.id.content), message, Snackbar.LENGTH_LONG)
+            .show()
+    }
+
 
     private fun handleRecognizePlantClick(navController: NavController, photoUri: Uri) {
         // Verificar se a permissão de localização foi concedida
