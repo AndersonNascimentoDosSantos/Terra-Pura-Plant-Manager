@@ -34,7 +34,6 @@ import androidx.viewpager2.widget.ViewPager2
 import br.com.fiap.terracuraplantmanager.components.CommonNameCard
 import br.com.fiap.terracuraplantmanager.components.DescriptionsCard
 import br.com.fiap.terracuraplantmanager.components.TaxonomyCard
-import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import coil.load
 import com.google.android.material.tabs.TabLayout
@@ -46,9 +45,9 @@ fun ImageDetailScreen(
     viewModel: PlantIdentificationViewModel,
     navController: NavController
 ) {
-    //    val plantInfo = viewModel.plantInfo.value
-    val context = LocalContext.current
-    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
+        val plantInfo = viewModel.plantInfo.value
+//    val context = LocalContext.current
+//    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
     // Recupere as informações da planta com base no plantId
     val suggestionImages = mutableListOf<String>()
     plantInfo?.let { info ->
