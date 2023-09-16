@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.fiap.terracuraplantmanager.model.DataMainipulation
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import br.com.fiap.terracuraplantmanager.screens.CameraScreen
 import br.com.fiap.terracuraplantmanager.screens.ConfirmName
@@ -29,7 +30,6 @@ import br.com.fiap.terracuraplantmanager.screens.PlantInfoScreen
 import br.com.fiap.terracuraplantmanager.screens.SplashScreen
 import br.com.fiap.terracuraplantmanager.screens.Welcome
 import com.google.android.gms.location.LocationServices
-import br.com.fiap.terracuraplantmanager.screens.Welcome
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -67,14 +67,14 @@ class MainActivity : ComponentActivity() {
                 composable("splash") {
                     SplashScreen(navController)
                 }
-                composable("welcome"){
+                composable("welcome") {
                     Welcome(navController = navController)
 
                 }
                 composable("confirmName") {
                     ConfirmName(navController = navController)
                 }
-                composable("myPlants"){
+                composable("myPlants") {
                     MyPlants(navController = navController)
                 }
                 composable("camera") {
@@ -83,8 +83,6 @@ class MainActivity : ComponentActivity() {
                         executor = cameraExecutor,
                         onImageCaptured = { uri -> handleImageCapture(navController, uri) },
                         onError = { Log.e("kilo", "View error:", it) },
-                        navController = navController
-
                     )
                 }
                 composable("imagePreview") {
@@ -97,12 +95,12 @@ class MainActivity : ComponentActivity() {
 
                 composable("plantInfo") {
 
-                    PlantInfoScreen(viewModel,navController)
+                    PlantInfoScreen(viewModel, navController)
                 }
                 composable("imageDetail/{plantId}") { navBackStackEntry ->
                     val plantId = navBackStackEntry.arguments?.getString("plantId")
                     if (plantId != null) {
-                        ImageDetailScreen( plantId.toInt(),viewModel,navController)
+                        ImageDetailScreen(plantId.toInt(), viewModel, navController)
                     }
                 }
             }
@@ -160,15 +158,16 @@ class MainActivity : ComponentActivity() {
                     // Verificar se a localização foi obtida com sucesso
                     if (location != null) {
 //                        viewModel.navigateTo("plantInfo")
-//                      val getData = DataMainipulation();
-//                      getData.getDataFromApi(
-//                          photoUri,
-//                          location,
-//                          navController,
-//                          viewModel )
-                        runOnUiThread {
-                            navController.navigate("plantInfo")
-                        }
+                        val getData = DataMainipulation();
+                        getData.getDataFromApi(
+                            photoUri,
+                            location,
+                            navController,
+                            viewModel
+                        )
+//                        runOnUiThread {
+//                            navController.navigate("plantInfo")
+//                        }
 
                     } else {
                         // Não foi possível obter a localização

@@ -19,15 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.terracuraplantmanager.components.ImageCard
 import br.com.fiap.terracuraplantmanager.data.PlantInfo
-import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 
 
 @Composable
 fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavController) {
-//    val plantInfo = viewModel.plantInfo.value
+    val plantInfo = viewModel.plantInfo.value
     val context = LocalContext.current
-    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
+//    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
 
 
 
