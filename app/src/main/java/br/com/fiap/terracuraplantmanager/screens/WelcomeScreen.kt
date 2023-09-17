@@ -39,7 +39,7 @@ fun Welcome(navController: NavController) {
 
         Text(
             text = "Gerencie suas plantas de forma facil",
-            fontSize = 30.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             lineHeight = 1.5.em,
             textAlign = TextAlign.Center,
@@ -76,7 +76,7 @@ fun Welcome(navController: NavController) {
         )
 
 
-        Spacer(modifier = Modifier.height(40.dp))
+       Spacer(modifier = Modifier.height(40.dp))
 
         Row {
             Button(
