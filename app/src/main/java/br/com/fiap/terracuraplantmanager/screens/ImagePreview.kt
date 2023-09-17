@@ -5,8 +5,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -16,8 +18,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.fiap.terracuraplantmanager.R
 import coil.compose.rememberImagePainter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +81,9 @@ fun ImagePreviewScreen(
         ) {
             Button(
                 onClick = { onBackClick() },
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(8.dp),
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
             ) {
                 Text(text = "Voltar")
             }
@@ -92,7 +98,9 @@ fun ImagePreviewScreen(
         ) {
             Button(
                 onClick = { onRecognizePlantClick(navController, photoUri) },
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(8.dp),
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
             ) {
                 Text(text = "Reconhecer Planta")
             }
