@@ -6,6 +6,7 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.fiap.terracuraplantmanager.model.DataMainipulation
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import br.com.fiap.terracuraplantmanager.screens.CameraScreen
 import br.com.fiap.terracuraplantmanager.screens.ConfirmName
@@ -29,7 +31,7 @@ import br.com.fiap.terracuraplantmanager.screens.PlantInfoScreen
 import br.com.fiap.terracuraplantmanager.screens.SplashScreen
 import br.com.fiap.terracuraplantmanager.screens.Welcome
 import com.google.android.gms.location.LocationServices
-import br.com.fiap.terracuraplantmanager.screens.Welcome
+import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
     private var plantInfo: MutableState<JSONObject> = mutableStateOf(JSONObject("{}"))
     private lateinit var photoUri: Uri
     private val REQUEST_LOCATION_PERMISSION = 123
-
+    private val STORAGE_PERMISSION_REQUEST_CODE = 123
     private lateinit var navController: NavController
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -51,15 +53,17 @@ class MainActivity : ComponentActivity() {
             Log.i("kilo", "Permission granted")
             navController.navigate("camera")
         } else {
-            Log.i("kilo", "Permission denied")
+            showMessage("Permissão negada. Você pode conceder a permissão nas configurações do aplicativo.")
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             navController = rememberNavController()
             requestCameraPermission()
+            requestStoragePermission()
             outputDirectory = getOutputDirectory()
             cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -67,14 +71,14 @@ class MainActivity : ComponentActivity() {
                 composable("splash") {
                     SplashScreen(navController)
                 }
-                composable("welcome"){
+                composable("welcome") {
                     Welcome(navController = navController)
 
                 }
                 composable("confirmName") {
                     ConfirmName(navController = navController)
                 }
-                composable("myPlants"){
+                composable("myPlants") {
                     MyPlants(navController = navController)
                 }
                 composable("camera") {
@@ -83,8 +87,6 @@ class MainActivity : ComponentActivity() {
                         executor = cameraExecutor,
                         onImageCaptured = { uri -> handleImageCapture(navController, uri) },
                         onError = { Log.e("kilo", "View error:", it) },
-                        navController = navController
-
                     )
                 }
                 composable("imagePreview") {
@@ -97,12 +99,12 @@ class MainActivity : ComponentActivity() {
 
                 composable("plantInfo") {
 
-                    PlantInfoScreen(viewModel,navController)
+                    PlantInfoScreen(viewModel, navController)
                 }
                 composable("imageDetail/{plantId}") { navBackStackEntry ->
                     val plantId = navBackStackEntry.arguments?.getString("plantId")
                     if (plantId != null) {
-                        ImageDetailScreen( plantId.toInt(),viewModel,navController)
+                        ImageDetailScreen(plantId.toInt(), viewModel, navController)
                     }
                 }
             }
@@ -144,6 +146,20 @@ class MainActivity : ComponentActivity() {
         return if (mediaDir != null && mediaDir.exists()) mediaDir else filesDir
     }
 
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            STORAGE_PERMISSION_REQUEST_CODE
+        )
+    }
+
+    private fun showMessage(message: String) {
+        Snackbar.make(findViewById<View>(android.R.id.content), message, Snackbar.LENGTH_LONG)
+            .show()
+    }
+
+
     private fun handleRecognizePlantClick(navController: NavController, photoUri: Uri) {
         // Verificar se a permissão de localização foi concedida
         if (ContextCompat.checkSelfPermission(
@@ -160,15 +176,16 @@ class MainActivity : ComponentActivity() {
                     // Verificar se a localização foi obtida com sucesso
                     if (location != null) {
 //                        viewModel.navigateTo("plantInfo")
-//                      val getData = DataMainipulation();
-//                      getData.getDataFromApi(
-//                          photoUri,
-//                          location,
-//                          navController,
-//                          viewModel )
-                        runOnUiThread {
-                            navController.navigate("plantInfo")
-                        }
+                        val getData = DataMainipulation();
+                        getData.getDataFromApi(
+                            photoUri,
+                            location,
+                            navController,
+                            viewModel
+                        )
+//                        runOnUiThread {
+//                            navController.navigate("plantInfo")
+//                        }
 
                     } else {
                         // Não foi possível obter a localização

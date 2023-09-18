@@ -18,21 +18,26 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import br.com.fiap.terracuraplantmanager.components.DetailCard
-import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
+import br.com.fiap.terracuraplantmanager.R
+import br.com.fiap.terracuraplantmanager.components.CommonNameCard
+import br.com.fiap.terracuraplantmanager.components.DescriptionsCard
+import br.com.fiap.terracuraplantmanager.components.TaxonomyCard
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import coil.load
 import com.google.android.material.tabs.TabLayout
@@ -44,9 +49,9 @@ fun ImageDetailScreen(
     viewModel: PlantIdentificationViewModel,
     navController: NavController
 ) {
-    //    val plantInfo = viewModel.plantInfo.value
-    val context = LocalContext.current
-    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
+    val plantInfo = viewModel.plantInfo.value
+//    val context = LocalContext.current
+//    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
     // Recupere as informações da planta com base no plantId
     val suggestionImages = mutableListOf<String>()
     plantInfo?.let { info ->
@@ -57,35 +62,60 @@ fun ImageDetailScreen(
         val similarImages =
             plantId?.let { suggestions.getJSONObject(it).optJSONArray("similar_images") }
 
+//        val commonNames = plantId?.let {
+//            suggestions
+//                .getJSONObject(it)
+//                .getJSONObject("details")
+//                .getJSONObject("common_names")
+//                .optJSONArray("pt")
+//                .takeIf { it != null && it.length() > 0 }
+//                ?: suggestions
+//                    .getJSONObject(it)
+//                    .getJSONObject("details")
+//                    .getJSONObject("common_names")
+//                    .getJSONArray("en").takeIf { it.length() > 0 } ?: JSONArray()
+//        }
+//        val commonNames = plantId?.let {
+//            val details = suggestions.getJSONObject(it).getJSONObject("details")
+//            val commonNamesPt = details.getJSONObject("common_names").getJSONArray("pt")
+//            val commonNamesEn = details.getJSONObject("common_names").getJSONArray("en")
+//
+//            if ((commonNamesPt?.length() ?: 0) > 0) {
+//                commonNamesPt
+//            } else if ((commonNamesEn?.length() ?: 0) > 0) {
+//                commonNamesEn
+//            } else {
+//                JSONArray()
+//            }
+//        } ?: JSONArray()
         val commonNames = plantId?.let {
-            suggestions
-                .getJSONObject(it)
+            val details = suggestions.getJSONObject(it).optJSONObject("details")
+            val commonNamesPt = details?.optJSONObject("common_names")?.optJSONArray("pt")
+            val commonNamesEn = details?.optJSONObject("common_names")?.optJSONArray("en")
+
+            if (commonNamesPt?.length() ?: 0 > 0) {
+                commonNamesPt
+            } else if (commonNamesEn?.length() ?: 0 > 0) {
+                commonNamesEn
+            } else {
+                null
+            }
+        } ?: null
+        val taxonomy = plantId?.let {
+            suggestions.getJSONObject(it)
                 .getJSONObject("details")
-                .getJSONObject("common_names")
-                .optJSONArray("pt")
-                .takeIf { it != null && it.length() > 0 }
-                ?: suggestions
-                    .getJSONObject(it)
-                    .getJSONObject("details")
-                    .getJSONObject("common_names")
-                    .getJSONArray("en")
+                .getJSONObject("taxonomy")
         }
-        val taxonomy = plantId?.let { suggestions.getJSONObject(it)
-            .getJSONObject("details")
-            .getJSONObject("taxonomy") }
+
         val description = plantId?.let {
             val descriptionObject = suggestions
                 .getJSONObject(it)
                 .getJSONObject("details")
                 .getJSONObject("description")
 
-            val ptDescription = descriptionObject.optJSONObject("pt")
-            val enDescription = descriptionObject.optJSONObject("en")
+            descriptionObject.optJSONObject("pt") ?: descriptionObject.optJSONObject("en")
 
-//            ptDescription?.optString("value") ?: enDescription?.optString("value") ?: ""
-            descriptionObject.optJSONObject("pt") ?:descriptionObject.optJSONObject("en")
-
-        } ?: ""
+        }
 
 
 
@@ -105,6 +135,8 @@ fun ImageDetailScreen(
             modifier = Modifier
                 .fillMaxHeight() // Preenche toda a altura disponível
                 .fillMaxWidth()
+                .padding(top = 50.dp)
+                .background(color = colorResource(id = R.color.green_plant))
         ) {
             Column(
                 modifier = Modifier
@@ -116,89 +148,10 @@ fun ImageDetailScreen(
                         .padding(5.dp),
                     verticalAlignment = Alignment.CenterVertically,
 
-                ) {
+                    ) {
                     ImageSlider(images = suggestionImages)
                 }
             }
-            /*
-//            Column(
-//                modifier = Modifier
-//                    .weight(2f) // Divide igualmente o espaço vertical disponível
-//                    .fillMaxWidth() // Preenche toda a largura disponível
-//            ) {
-//                Row(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(5.dp)
-//                        .horizontalScroll(rememberScrollState()), // Habilita a rolagem horizontal,
-//                    horizontalArrangement = Arrangement.SpaceBetween
-//
-//                ) {
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth(1.2f) // Preenche 1/3 da largura disponível
-//                            .background(Color.Red)
-//                            .padding(5.dp)
-//                    ) {
-//                        // Preencha esta coluna com o conteúdo desejado
-//                        Row(
-//                            modifier = Modifier.fillMaxWidth() .padding(5.dp),
-//                            horizontalArrangement = Arrangement.SpaceBetween
-//                        ) {
-//
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")       }
-//
-//                    }
-//
-//                    Spacer(modifier = Modifier.width(5.dp)) // Adiciona um espaço de 5dp entre as colunas
-//
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth(1.2f) // Preenche 1/3 da largura disponível
-//                            .background(Color.Blue)
-//                            .padding(5.dp)
-//                    ) {
-//                        // Preencha esta coluna com o conteúdo desejado
-//                        Row(
-//                            modifier = Modifier.fillMaxWidth() .padding(5.dp),
-//                            horizontalArrangement = Arrangement.SpaceBetween
-//                        ) { Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                        }
-//
-//                    }
-//
-//                    Spacer(modifier = Modifier.width(5.dp)) // Adiciona um espaço de 5dp entre as colunas
-//
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth(1.2f) // Preenche 1/3 da largura disponível
-//                            .background(Color.Black)
-//                            .padding(5.dp)
-//                    ) {
-//                        // Preencha esta coluna com o conteúdo desejado
-//                        Row(
-//                            modifier = Modifier.fillMaxWidth() .padding(5.dp),
-//                            horizontalArrangement = Arrangement.SpaceBetween
-//                        ) { Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                            Text(text = "Column 3")
-//                        }
-//
-//                    }
-//                }
-//            }
-
-             */
 
             Column(
                 modifier = Modifier
@@ -209,55 +162,14 @@ fun ImageDetailScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(5.dp)
-                        .horizontalScroll(rememberScrollState())
-                        , // Habilita a rolagem horizontal,
+                        .horizontalScroll(rememberScrollState()), // Habilita a rolagem horizontal,
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    DetailCard(commonNames)
+                    CommonNameCard(commonNames)
                     Spacer(modifier = Modifier.width(5.dp))
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize() // Preenche toda a largura disponível
-                            .fillMaxWidth()
-                            .background(Color.Blue)
-                            .padding(5.dp)
-                    ) {
-                        // Preencha esta coluna com o conteúdo desejado
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) { Text(text = "Column 3")
-                            Text(text = "Column 3")
-                            Text(text = "Column 3")
-                            Text(text = "Column 3")
-                            Text(text = "Column 3")
-                                                    }
-
-                    }
+                    DescriptionsCard(descriptions = description)
                     Spacer(modifier = Modifier.width(5.dp))
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize() // Preenche toda a largura disponível
-                            .background(Color.Black)
-                            .fillMaxWidth()
-                            .padding(5.dp)
-                    ) {
-                        // Preencha esta coluna com o conteúdo desejado
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) { Text(text = "Column 3")
-                            Text(text = "Column 3")
-                            Text(text = "Column 3")
-                            Text(text = "Column 3")
-                            Text(text = "Column 3")
-                                                    }
-
-                    }
+                    TaxonomyCard(taxonomy = taxonomy)
                 }
             }
 
@@ -268,38 +180,50 @@ fun ImageDetailScreen(
 //                    .background(Color.Red)
             ) {
                 Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Button(
-                    onClick = {
-                        // Navegue de volta para a tela anterior
-                        viewModel.goback(navController = navController)
-                    },
                     modifier = Modifier
-                        .width(150.dp)
-                        .height(65.dp)
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Voltar")
-                }
+                    Button(
+                        onClick = {
+                            // Navegue de volta para a tela anterior
+                            viewModel.goback(navController = navController)
+                        },
+                        modifier = Modifier
+                            .width(150.dp)
+                            .height(65.dp),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
+                    ) {
+                        Text(
+                            text = "Voltar",
+                            color = colorResource(id = R.color.green_plant)
+                        )
+                    }
 
-                // Botão de Adicionar Planta
-                Button(
-                    onClick = {
-                        // Implemente a lógica para adicionar uma planta aqui
-                        // Por exemplo, você pode abrir uma nova tela para adicionar a planta
-                    },
-                    modifier = Modifier
-                        .width(200.dp)
-                        .height(65.dp)
-                ) {
-                    Text(text = "Adicionar Planta")
+                    // Botão de Adicionar Planta
+                    Button(
+                        onClick = {
+                            // Implemente a lógica para adicionar uma planta aqui
+                            // Por exemplo, você pode abrir uma nova tela para adicionar a planta
+                        },
+
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(65.dp)
+                    ) {
+                        Text(
+                            text = "Adicionar Planta",
+                            fontSize = 13.sp,
+                            color = colorResource(id = R.color.green_plant)
+                        )
+                    }
                 }
             }
-        }
 
         }
     }

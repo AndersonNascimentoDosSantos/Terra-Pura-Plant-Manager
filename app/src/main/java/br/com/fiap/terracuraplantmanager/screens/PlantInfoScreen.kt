@@ -14,20 +14,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.terracuraplantmanager.components.ImageCard
 import br.com.fiap.terracuraplantmanager.data.PlantInfo
-import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 
 
 @Composable
 fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavController) {
-//    val plantInfo = viewModel.plantInfo.value
-    val context = LocalContext.current
-    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
+    val plantInfo = viewModel.plantInfo.value
+//    val context = LocalContext.current
+//    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
 
 
 
@@ -35,48 +33,44 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp).verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
         plantInfo?.let { info ->
-            val imageUri = info.optString("image")
+//            val imageUri = info.optString("image")
 
             val suggestions = info.getJSONObject("result").getJSONObject("classification").getJSONArray("suggestions")
             val suggestionImages = mutableListOf<PlantInfo>()
 
-            if (suggestions != null) {
-                for (i in 0 until suggestions.length()) {
-                    val suggestion = suggestions.getJSONObject(i)
-                    val similarImages = suggestion.optJSONArray("similar_images")
-                    val name = suggestion.optString("name")
-                    val probability = suggestion.optString("probability")
-                    if (similarImages != null && similarImages.length() > 0) {
-                        val imageUrl = similarImages.getJSONObject(0).optString("url")
+            for (i in 0 until suggestions.length()) {
+                val suggestion = suggestions.getJSONObject(i)
+                val similarImages = suggestion.optJSONArray("similar_images")
+                val name = suggestion.optString("name")
+                val probability = suggestion.optString("probability")
+                if (similarImages != null && similarImages.length() > 0) {
+                    val imageUrl = similarImages.getJSONObject(0).optString("url")
 //                        val name = similarImages.getJSONObject(0).optString("name")
 //                        val id = similarImages.getJSONObject(0).optString("id")
-                        if (imageUrl.isNotEmpty()) {
+                    if (imageUrl.isNotEmpty()) {
 //                            Log.e("if imageurl", "item no imageUrl")
 //                            Log.e("index:", "valor do index:$i")
-                            suggestionImages.add(PlantInfo(imageUrl, name,i,probability))
-                        }
-                    }else{
-                        Log.e("imageUrl:","nao tem imagem similar")
+                        suggestionImages.add(PlantInfo(imageUrl, name,i,probability))
                     }
+                }else{
+                    Log.e("imageUrl:","nao tem imagem similar")
                 }
-            }else{
-                Log.e("imageUrl:","nao tem sugestions")
             }
 
             if (suggestionImages.isNotEmpty()) {
 //                ImageSlider(images = suggestionImages)
-                val chunkedImages = suggestionImages.chunked(2)
+                val chunkedImages = suggestionImages.chunked(1)
                 chunkedImages.forEach { rowImages ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         rowImages.forEach { plantInfo ->
                             ImageCard( plantInfo = plantInfo, navController = navController)
+
                         }
                     }
                 }
