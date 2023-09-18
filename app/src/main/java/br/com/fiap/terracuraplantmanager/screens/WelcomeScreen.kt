@@ -38,13 +38,13 @@ fun Welcome(navController: NavController) {
     ) {
 
         Text(
-            text = "Gerencie suas plantas de forma facil",
-            fontSize = 20.sp,
+            text = "Descubra um mundo verde em poucos segundos!",
+            fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             lineHeight = 1.5.em,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .width(198.dp)
+                .width(300.dp)
                 .padding(top = 50.dp),
             color = MaterialTheme.colorScheme.secondary,
             style = MaterialTheme.typography.bodyMedium
@@ -68,9 +68,9 @@ fun Welcome(navController: NavController) {
         Spacer(modifier = Modifier.height(50.dp))
 
         Text(
-            text = "Não esqueça mais de regar suas plantas, Nós cuidamos de lembrar você sempre que precisar",
+            text = "Explore suas plantas favoritas com facilidade! Tire uma foto e descubra nomes científicos, apelidos e plantas similares. Comece agora",
             textAlign = TextAlign.Center,
-            fontSize = 16.sp,
+            fontSize = 17.sp,
             modifier = Modifier.width(300.dp),
             color = MaterialTheme.colorScheme.secondary
         )
@@ -79,27 +79,35 @@ fun Welcome(navController: NavController) {
        Spacer(modifier = Modifier.height(40.dp))
 
         Row {
-            Button(
-                onClick = { navController.navigate("confirmName") },
-                shape = RoundedCornerShape(13.dp),
-                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.arrow),
-                    contentDescription = "arrow",
-                    modifier = Modifier.size(30.dp)
-                )
-            }
+           // Button(
+           //     onClick = { navController.navigate("confirmName") },
+           //     shape = RoundedCornerShape(13.dp),
+           //     colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
+           // ) {
+           //     Image(
+           //         painter = painterResource(id = R.drawable.arrow),
+           //         contentDescription = "arrow",
+           //         modifier = Modifier.size(30.dp)
+           //     )
+           // }
             Spacer(modifier = Modifier.width(25.dp))
             Button(
                 onClick = { navController.navigate("camera") },
                 shape = RoundedCornerShape(13.dp),
-                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant)),
+                modifier = Modifier
+                    .width(250.dp)
+                    .height(60.dp)
             ) {
+                Text(
+                    text = "Identificar Planta! ",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
                 Image(
                     painter = painterResource(id = R.drawable.icons8_camera_94),
                     contentDescription = "arrow",
-                    modifier = Modifier.size(30.dp)
+                    modifier = Modifier.size(100.dp)
                 )
             }
         }
