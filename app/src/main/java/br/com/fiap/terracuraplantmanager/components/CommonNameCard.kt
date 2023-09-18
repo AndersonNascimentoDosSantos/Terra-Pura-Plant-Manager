@@ -38,7 +38,8 @@ fun CommonNameCard(
             modifier = Modifier
                 .fillMaxSize()
                 .width((LocalConfiguration.current.screenWidthDp * 0.95).dp)
-                .padding(5.dp), verticalArrangement = Arrangement.Center
+                .padding(5.dp, top = 30.dp), verticalArrangement = Arrangement.Center
+
 //                    .blur()
         ) {
 
@@ -48,7 +49,7 @@ fun CommonNameCard(
                 val names = mutableListOf<String>()
                 Text(
                     text = "Nomes comuns: ", modifier = Modifier,
-                    style = MaterialTheme.typography.headlineLarge,
+                    style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -72,8 +73,8 @@ fun CommonNameCard(
                     ) {
 //                    rowNames.forEach { name ->
                         Text(
-                            text = rowNames.joinToString(","), modifier = Modifier,
-                            style = MaterialTheme.typography.headlineMedium
+                            text = rowNames.joinToString(", "),
+                            style = MaterialTheme.typography.bodyLarge,
                         )
                         Spacer(modifier = Modifier.width(5.dp))
 //                    }
@@ -84,7 +85,7 @@ fun CommonNameCard(
                 Text(
                     text = "Não Possui Nomes Comuns registrados",
                     modifier = Modifier.padding(16.dp),
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
         }
