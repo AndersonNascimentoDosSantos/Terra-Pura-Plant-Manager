@@ -18,19 +18,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import br.com.fiap.terracuraplantmanager.R
 import br.com.fiap.terracuraplantmanager.components.CommonNameCard
 import br.com.fiap.terracuraplantmanager.components.DescriptionsCard
 import br.com.fiap.terracuraplantmanager.components.TaxonomyCard
@@ -45,7 +49,7 @@ fun ImageDetailScreen(
     viewModel: PlantIdentificationViewModel,
     navController: NavController
 ) {
-        val plantInfo = viewModel.plantInfo.value
+    val plantInfo = viewModel.plantInfo.value
 //    val context = LocalContext.current
 //    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
     // Recupere as informações da planta com base no plantId
@@ -97,9 +101,11 @@ fun ImageDetailScreen(
                 null
             }
         } ?: null
-        val taxonomy = plantId?.let { suggestions.getJSONObject(it)
-            .getJSONObject("details")
-            .getJSONObject("taxonomy") }
+        val taxonomy = plantId?.let {
+            suggestions.getJSONObject(it)
+                .getJSONObject("details")
+                .getJSONObject("taxonomy")
+        }
 
         val description = plantId?.let {
             val descriptionObject = suggestions
@@ -107,7 +113,7 @@ fun ImageDetailScreen(
                 .getJSONObject("details")
                 .getJSONObject("description")
 
-            descriptionObject.optJSONObject("pt") ?:descriptionObject.optJSONObject("en")
+            descriptionObject.optJSONObject("pt") ?: descriptionObject.optJSONObject("en")
 
         }
 
@@ -129,9 +135,8 @@ fun ImageDetailScreen(
             modifier = Modifier
                 .fillMaxHeight() // Preenche toda a altura disponível
                 .fillMaxWidth()
-                .background(
-                    color = MaterialTheme.colorScheme.secondary
-                )
+                .padding(top = 50.dp)
+                .background(color = colorResource(id = R.color.green_plant))
         ) {
             Column(
                 modifier = Modifier
@@ -143,7 +148,7 @@ fun ImageDetailScreen(
                         .padding(5.dp),
                     verticalAlignment = Alignment.CenterVertically,
 
-                ) {
+                    ) {
                     ImageSlider(images = suggestionImages)
                 }
             }
@@ -157,15 +162,14 @@ fun ImageDetailScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(5.dp)
-                        .horizontalScroll(rememberScrollState())
-                        , // Habilita a rolagem horizontal,
+                        .horizontalScroll(rememberScrollState()), // Habilita a rolagem horizontal,
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     CommonNameCard(commonNames)
                     Spacer(modifier = Modifier.width(5.dp))
                     DescriptionsCard(descriptions = description)
                     Spacer(modifier = Modifier.width(5.dp))
-                    TaxonomyCard(taxonomy=taxonomy)
+                    TaxonomyCard(taxonomy = taxonomy)
                 }
             }
 
@@ -176,38 +180,50 @@ fun ImageDetailScreen(
 //                    .background(Color.Red)
             ) {
                 Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Button(
-                    onClick = {
-                        // Navegue de volta para a tela anterior
-                        viewModel.goback(navController = navController)
-                    },
                     modifier = Modifier
-                        .width(150.dp)
-                        .height(65.dp)
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Voltar")
-                }
+                    Button(
+                        onClick = {
+                            // Navegue de volta para a tela anterior
+                            viewModel.goback(navController = navController)
+                        },
+                        modifier = Modifier
+                            .width(150.dp)
+                            .height(65.dp),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
+                    ) {
+                        Text(
+                            text = "Voltar",
+                            color = colorResource(id = R.color.green_plant)
+                        )
+                    }
 
-                // Botão de Adicionar Planta
-                Button(
-                    onClick = {
-                        // Implemente a lógica para adicionar uma planta aqui
-                        // Por exemplo, você pode abrir uma nova tela para adicionar a planta
-                    },
-                    modifier = Modifier
-                        .width(200.dp)
-                        .height(65.dp)
-                ) {
-                    Text(text = "Adicionar Planta")
+                    // Botão de Adicionar Planta
+                    Button(
+                        onClick = {
+                            // Implemente a lógica para adicionar uma planta aqui
+                            // Por exemplo, você pode abrir uma nova tela para adicionar a planta
+                        },
+
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(65.dp)
+                    ) {
+                        Text(
+                            text = "Adicionar Planta",
+                            fontSize = 13.sp,
+                            color = colorResource(id = R.color.green_plant)
+                        )
+                    }
                 }
             }
-        }
 
         }
     }
