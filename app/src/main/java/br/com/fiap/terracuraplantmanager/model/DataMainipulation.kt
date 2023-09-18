@@ -48,7 +48,8 @@ class DataMainipulation {
         val request = Request.Builder()
             .url("https://plant.id/api/v3/identification?details=common_names,url,description,taxonomy,rank,gbif_id,inaturalist_id,image,synonyms,edible_parts,watering,propagation_methods&language=pt,en")
             .post(RequestBody.create(MediaType.parse("application/json"), jsonObject.toString()))
-            .addHeader("Api-Key", "GJA2ik5Ir2PDmPm3SogNxMp3nt7wcNkQvfEcG3Su46gxeKB3YX")
+            .addHeader("Api-Key", "1f2W94Nswj35wC8YXUAPNL7Fmi8cBFXbszk6JVyVt7F6GLeVH3")
+            //.addHeader("Api-Key", "GJA2ik5Ir2PDmPm3SogNxMp3nt7wcNkQvfEcG3Su46gxeKB3YX")
             .build()
         val client = OkHttpClient()
         client.newCall(request).enqueue(object : Callback {
