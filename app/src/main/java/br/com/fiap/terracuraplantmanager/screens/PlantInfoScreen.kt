@@ -33,8 +33,8 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp).verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
         plantInfo?.let { info ->
 //            val imageUri = info.optString("image")
@@ -63,14 +63,14 @@ fun PlantInfoScreen(viewModel: PlantIdentificationViewModel,navController: NavCo
 
             if (suggestionImages.isNotEmpty()) {
 //                ImageSlider(images = suggestionImages)
-                val chunkedImages = suggestionImages.chunked(2)
+                val chunkedImages = suggestionImages.chunked(1)
                 chunkedImages.forEach { rowImages ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         rowImages.forEach { plantInfo ->
                             ImageCard( plantInfo = plantInfo, navController = navController)
+
                         }
                     }
                 }
