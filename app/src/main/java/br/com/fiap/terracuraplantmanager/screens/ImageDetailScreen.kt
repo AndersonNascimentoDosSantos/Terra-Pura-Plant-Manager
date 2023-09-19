@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -38,6 +39,7 @@ import br.com.fiap.terracuraplantmanager.R
 import br.com.fiap.terracuraplantmanager.components.CommonNameCard
 import br.com.fiap.terracuraplantmanager.components.DescriptionsCard
 import br.com.fiap.terracuraplantmanager.components.TaxonomyCard
+import br.com.fiap.terracuraplantmanager.mock.JsonUtilsMockData
 import br.com.fiap.terracuraplantmanager.model.PlantIdentificationViewModel
 import coil.load
 import com.google.android.material.tabs.TabLayout
@@ -45,49 +47,24 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 @Composable
 fun ImageDetailScreen(
-    plantId: Int?,
-    viewModel: PlantIdentificationViewModel,
-    navController: NavController
+    plantId: Int?, viewModel: PlantIdentificationViewModel, navController: NavController
 ) {
-    val plantInfo = viewModel.plantInfo.value
-//    val context = LocalContext.current
-//    val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
+
+
+
+   val plantInfo = viewModel.plantInfo.value
+    // val context = LocalContext.current
+    // val plantInfo = JsonUtilsMockData.loadJsonFromAsset(context, "mockdata.json")
     // Recupere as informações da planta com base no plantId
     val suggestionImages = mutableListOf<String>()
     plantInfo?.let { info ->
-        val suggestions = info.getJSONObject("result").getJSONObject("classification")
-            .getJSONArray("suggestions")
+        val suggestions =
+            info.getJSONObject("result").getJSONObject("classification").getJSONArray("suggestions")
 
 
         val similarImages =
             plantId?.let { suggestions.getJSONObject(it).optJSONArray("similar_images") }
 
-//        val commonNames = plantId?.let {
-//            suggestions
-//                .getJSONObject(it)
-//                .getJSONObject("details")
-//                .getJSONObject("common_names")
-//                .optJSONArray("pt")
-//                .takeIf { it != null && it.length() > 0 }
-//                ?: suggestions
-//                    .getJSONObject(it)
-//                    .getJSONObject("details")
-//                    .getJSONObject("common_names")
-//                    .getJSONArray("en").takeIf { it.length() > 0 } ?: JSONArray()
-//        }
-//        val commonNames = plantId?.let {
-//            val details = suggestions.getJSONObject(it).getJSONObject("details")
-//            val commonNamesPt = details.getJSONObject("common_names").getJSONArray("pt")
-//            val commonNamesEn = details.getJSONObject("common_names").getJSONArray("en")
-//
-//            if ((commonNamesPt?.length() ?: 0) > 0) {
-//                commonNamesPt
-//            } else if ((commonNamesEn?.length() ?: 0) > 0) {
-//                commonNamesEn
-//            } else {
-//                JSONArray()
-//            }
-//        } ?: JSONArray()
         val commonNames = plantId?.let {
             val details = suggestions.getJSONObject(it).optJSONObject("details")
             val commonNamesPt = details?.optJSONObject("common_names")?.optJSONArray("pt")
@@ -102,16 +79,12 @@ fun ImageDetailScreen(
             }
         } ?: null
         val taxonomy = plantId?.let {
-            suggestions.getJSONObject(it)
-                .getJSONObject("details")
-                .getJSONObject("taxonomy")
+            suggestions.getJSONObject(it).getJSONObject("details").getJSONObject("taxonomy")
         }
 
         val description = plantId?.let {
-            val descriptionObject = suggestions
-                .getJSONObject(it)
-                .getJSONObject("details")
-                .getJSONObject("description")
+            val descriptionObject =
+                suggestions.getJSONObject(it).getJSONObject("details").getJSONObject("description")
 
             descriptionObject.optJSONObject("pt") ?: descriptionObject.optJSONObject("en")
 
@@ -135,17 +108,16 @@ fun ImageDetailScreen(
             modifier = Modifier
                 .fillMaxHeight() // Preenche toda a altura disponível
                 .fillMaxWidth()
-                .padding(top = 50.dp)
                 .background(color = colorResource(id = R.color.green_plant))
         ) {
             Column(
                 modifier = Modifier
                     .weight(1f) // Divide igualmente o espaço vertical disponível
                     .fillMaxWidth() // Preenche toda a largura disponível
+                    .padding(top = 10.dp)
             ) {
                 Row(
-                    modifier = Modifier
-                        .padding(5.dp),
+                    modifier = Modifier.padding(5.dp),
                     verticalAlignment = Alignment.CenterVertically,
 
                     ) {
@@ -182,7 +154,7 @@ fun ImageDetailScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(5.dp),
+                        .padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -199,7 +171,8 @@ fun ImageDetailScreen(
                     ) {
                         Text(
                             text = "Voltar",
-                            color = colorResource(id = R.color.green_plant)
+                            color = colorResource(id = R.color.green_plant),
+                            fontSize = 18.sp, fontWeight = FontWeight.Bold
                         )
                     }
 
@@ -218,8 +191,9 @@ fun ImageDetailScreen(
                     ) {
                         Text(
                             text = "Adicionar Planta",
-                            fontSize = 13.sp,
-                            color = colorResource(id = R.color.green_plant)
+                            color = colorResource(id = R.color.green_plant),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
@@ -255,8 +229,7 @@ class ViewPagerAdapter(private val images: List<String>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val imageView = ImageView(parent.context)
         imageView.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         )
         return ViewHolder(imageView)
     }

@@ -19,7 +19,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.terracuraplantmanager.R
 import coil.compose.rememberImagePainter
@@ -98,11 +100,19 @@ fun ImagePreviewScreen(
         ) {
             Button(
                 onClick = { onRecognizePlantClick(navController, photoUri) },
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .width(250.dp)
+                    .height(65.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant))
             ) {
-                Text(text = "Reconhecer Planta")
+                Text(
+                    text = "Reconhecer Planta",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+
+                )
             }
         }
     }
