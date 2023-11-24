@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,12 +35,14 @@ fun Welcome(navController: NavController) {
         .setPopUpTo("camera", inclusive = true)
         .build()
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxWidth()  // Manter largura máxima
     ) {
 
         Text(
             text = "Descubra um mundo verde em poucos segundos!",
-            fontSize = 25.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             lineHeight = 1.5.em,
             textAlign = TextAlign.Center,
@@ -50,33 +53,33 @@ fun Welcome(navController: NavController) {
             style = MaterialTheme.typography.bodyMedium
         )
 
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         Row {
             Image(
                 painter = painterResource(id = R.drawable.ilustra),
                 contentDescription = "ilustra",
-                modifier = Modifier.size(300.dp),
+                modifier = Modifier.size(280.dp),
             )
-            Spacer(modifier = Modifier.width(100.dp))
+            Spacer(modifier = Modifier.width(60.dp))
         }
 
         Column {
 
         }
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         Text(
             text = "Explore suas plantas favoritas com facilidade! Tire uma foto e descubra nomes científicos, apelidos e plantas similares. Comece agora",
             textAlign = TextAlign.Center,
-            fontSize = 17.sp,
+            fontSize = 15.sp,
             modifier = Modifier.width(300.dp),
             color = MaterialTheme.colorScheme.secondary
         )
 
 
-       Spacer(modifier = Modifier.height(40.dp))
+       Spacer(modifier = Modifier.height(30.dp))
 
         Row {
            // Button(
@@ -96,18 +99,18 @@ fun Welcome(navController: NavController) {
                 shape = RoundedCornerShape(13.dp),
                 colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant)),
                 modifier = Modifier
-                    .width(250.dp)
+                    .width(260.dp)
                     .height(60.dp)
             ) {
                 Text(
                     text = "Identificar Planta! ",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Image(
                     painter = painterResource(id = R.drawable.icons8_camera_94),
                     contentDescription = "arrow",
-                    modifier = Modifier.size(100.dp)
+                    modifier = Modifier.size(80.dp)
                 )
             }
         }
