@@ -37,7 +37,7 @@ fun Welcome(navController: NavController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()  // Manter largura máxima
     ) {
 
         Text(
