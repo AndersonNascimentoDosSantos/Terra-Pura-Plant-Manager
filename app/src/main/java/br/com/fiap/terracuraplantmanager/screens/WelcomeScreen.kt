@@ -99,7 +99,7 @@ fun Welcome(navController: NavController) {
                 shape = RoundedCornerShape(13.dp),
                 colors = ButtonDefaults.buttonColors(colorResource(id = R.color.green_plant)),
                 modifier = Modifier
-                    .width(250.dp)
+                    .width(260.dp)
                     .height(60.dp)
             ) {
                 Text(
